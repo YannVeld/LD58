@@ -1,19 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://ddm6vp0cbx0f4"]
 
 [ext_resource type="Script" uid="uid://tk6akncy0g8c" path="res://Scripts/mailbox.gd" id="1_gqu8m"]
-[ext_resource type="Texture2D" uid="uid://beo24nqbwopj8" path="res://Sprites/greenSquare.png" id="2_r8alw"]
-[ext_resource type="Texture2D" uid="uid://bi2ertktpn8qj" path="res://Sprites/yellowCircle.png" id="3_nhb1q"]
+[ext_resource type="Texture2D" uid="uid://cp84nj83y4ytk" path="res://Sprites/Postbox_up.png" id="2_nhb1q"]
+[ext_resource type="Texture2D" uid="uid://ctugxg3mlql1m" path="res://Sprites/LetterMarker.png" id="3_fdoi0"]
 
 [node name="Mailbox" type="Area2D"]
 script = ExtResource("1_gqu8m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_r8alw")
+texture = ExtResource("2_nhb1q")
 
 [node name="readyMarker" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(0, -21)
-texture = ExtResource("3_nhb1q")
+position = Vector2(0, -32)
+texture = ExtResource("3_fdoi0")
 
 [node name="collectionTimer" type="Timer" parent="."]
 wait_time = 7.5

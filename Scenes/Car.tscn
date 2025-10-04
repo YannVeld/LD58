@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://cr8ljerwlh3mh"]
+[gd_scene load_steps=14 format=3 uid="uid://cr8ljerwlh3mh"]
 
 [ext_resource type="Script" uid="uid://ylfclj4c2uk7" path="res://Scripts/car.gd" id="1_8tfcp"]
-[ext_resource type="Texture2D" uid="uid://beo24nqbwopj8" path="res://Sprites/greenSquare.png" id="2_e1atf"]
 [ext_resource type="PackedScene" uid="uid://cjjrpk3rxk1m1" path="res://Scenes/sprite_stack.tscn" id="3_7iea3"]
 [ext_resource type="Texture2D" uid="uid://c18gy3vauhlrp" path="res://Sprites/VoxelCar/00_VoxelCarSlices.png" id="4_e1atf"]
 [ext_resource type="Texture2D" uid="uid://b13ey1qkfhejj" path="res://Sprites/VoxelCar/01_VoxelCarSlices.png" id="5_cewjx"]
@@ -24,7 +23,6 @@ script = ExtResource("1_8tfcp")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 scale = Vector2(2, 0.87499994)
-texture = ExtResource("2_e1atf")
 
 [node name="SpriteStack" parent="CharacterBody2D" instance=ExtResource("3_7iea3")]
 rotation = 1.5707964
