@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjjrpk3rxk1m1"]
+
+[ext_resource type="Script" uid="uid://dkfwgo6mqlwwv" path="res://Scripts/sprite_stack.gd" id="1_tm8xu"]
+
+[node name="SpriteStack" type="Node2D"]
+script = ExtResource("1_tm8xu")
