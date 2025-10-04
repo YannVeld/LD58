@@ -6,7 +6,8 @@ extends CharacterBody2D
 @export var braking = -450
 @export var max_speed_reverse = 250
 @export var min_speed = 25
-@export var drift_threshold_speed = 100
+@export var critical_speed_low = 100
+@export var critical_speed_high = 150
 @export var traction_fast = 0.0
 @export var traction_slow = 0.7
 
@@ -19,7 +20,7 @@ var steer_direction
 func get_input():
 	var turn = Input.get_axis("steer_left", "steer_right")
 	steer_direction = turn * deg_to_rad(steering_angle)
-	print(steer_direction)
+	#print(steer_direction)
 	if Input.is_action_pressed("accelerate"):
 		acceleration = transform.x * engine_power
 	if Input.is_action_pressed("brake"):
@@ -41,9 +42,10 @@ func calculate_steering(delta):
 	var new_heading = rear_wheel.direction_to(front_wheel)
 	
 	var traction = traction_slow
-	if velocity.length() > drift_threshold_speed:
+	if velocity.length()>critical_speed_high:
 		traction = traction_fast
-		print("drifting")
+	elif velocity.length()>critical_speed_low:
+		traction = traction_slow + (traction_fast-traction_slow)*(velocity.length() - critical_speed_low)/(critical_speed_high - critical_speed_low)
 
 	velocity = velocity.lerp(new_heading*velocity.length(), traction)
 	rotation = new_heading.angle()
@@ -56,9 +58,12 @@ func _physics_process(delta: float) -> void:
 	acceleration = Vector2.ZERO
 	get_input()
 	apply_friction(delta)
-	print(acceleration)
+	#print(acceleration)
 	velocity += acceleration * delta
 	if velocity.length()>0:
 		calculate_steering(delta)
 	move_and_slide()
-	print("velocity = ", velocity.length() )
+	#print("velocity = ", velocity.length() )
+
+func handle_collision():
+	print("omg! this car just collided with a building" )

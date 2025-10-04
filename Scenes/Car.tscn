@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://cr8ljerwlh3mh"]
+[gd_scene load_steps=15 format=3 uid="uid://cr8ljerwlh3mh"]
 
-[ext_resource type="Texture2D" uid="uid://euk13n5vuy58" path="res://Sprites/redSquare.png" id="1_5orbf"]
-[ext_resource type="Script" uid="uid://ylfclj4c2uk7" path="res://Scripts/movement.gd" id="1_8tfcp"]
+[ext_resource type="Script" uid="uid://ylfclj4c2uk7" path="res://Scripts/car.gd" id="1_8tfcp"]
+[ext_resource type="Texture2D" uid="uid://beo24nqbwopj8" path="res://Sprites/greenSquare.png" id="2_e1atf"]
 [ext_resource type="PackedScene" uid="uid://cjjrpk3rxk1m1" path="res://Scenes/sprite_stack.tscn" id="3_7iea3"]
 [ext_resource type="Texture2D" uid="uid://c18gy3vauhlrp" path="res://Sprites/VoxelCar/00_VoxelCarSlices.png" id="4_e1atf"]
 [ext_resource type="Texture2D" uid="uid://b13ey1qkfhejj" path="res://Sprites/VoxelCar/01_VoxelCarSlices.png" id="5_cewjx"]
@@ -14,15 +14,17 @@
 [ext_resource type="Texture2D" uid="uid://6m48r8oaslvr" path="res://Sprites/VoxelCar/08_VoxelCarSlices.png" id="12_pkjdc"]
 [ext_resource type="Texture2D" uid="uid://bpl7bud82nx0y" path="res://Sprites/VoxelCar/09_VoxelCarSlices.png" id="13_y0bmx"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1atf"]
+size = Vector2(20, 13)
+
 [node name="Car" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_8tfcp")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-visible = false
-scale = Vector2(3.375, 1.75)
-texture = ExtResource("1_5orbf")
+scale = Vector2(2, 0.87499994)
+texture = ExtResource("2_e1atf")
 
 [node name="SpriteStack" parent="CharacterBody2D" instance=ExtResource("3_7iea3")]
 rotation = 1.5707964
@@ -30,3 +32,7 @@ sprites = Array[Texture2D]([ExtResource("4_e1atf"), ExtResource("5_cewjx"), ExtR
 offset = 1.25
 reverseOrder = true
 layerCopies = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_e1atf")

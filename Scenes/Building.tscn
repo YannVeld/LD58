@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://r0d141lg2pk5"]
+
+[ext_resource type="Script" uid="uid://nx6bt0oiyarw" path="res://Scripts/building.gd" id="1_1q4et"]
+[ext_resource type="Texture2D" uid="uid://8kgqf5gwwxvi" path="res://Sprites/brownBlock.png" id="1_33ows"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33ows"]
+size = Vector2(16, 16)
+
+[node name="Area2D" type="Area2D" groups=["Buildings"]]
+script = ExtResource("1_1q4et")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_33ows")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_33ows")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
