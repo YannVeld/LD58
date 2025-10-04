@@ -23,7 +23,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if isActive:
 		body.handle_mail_pickup()
 		gameManager.deactivate_mailbox(given_idx)
-		#gameManager.score()
+		gameManager.score_collection($collectionTimer.time_left)
 		isActive = false
 		
 func activate(idx):
