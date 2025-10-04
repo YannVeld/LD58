@@ -1,18 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://r0d141lg2pk5"]
 
 [ext_resource type="Script" uid="uid://nx6bt0oiyarw" path="res://Scripts/stunzone.gd" id="1_1q4et"]
-[ext_resource type="Texture2D" uid="uid://8kgqf5gwwxvi" path="res://Sprites/brownBlock.png" id="1_33ows"]
+[ext_resource type="Texture2D" uid="uid://tqamaalos3t2" path="res://Sprites/HouseParts/House_base.png" id="2_1q4et"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_33ows"]
-size = Vector2(16, 16)
+size = Vector2(31.507708, 30.398249)
 
 [node name="Area2D" type="Area2D" groups=["Buildings"]]
 script = ExtResource("1_1q4et")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_33ows")
+texture = ExtResource("2_1q4et")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.74840903, 16.702276)
+rotation = 0.43943542
+scale = Vector2(0.9999997, 0.9999997)
+skew = 0.652753
 shape = SubResource("RectangleShape2D_33ows")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
