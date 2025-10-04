@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=4 uid="uid://bv4e4ssw5lhku"]
+[gd_scene load_steps=13 format=4 uid="uid://bv4e4ssw5lhku"]
 
 [ext_resource type="PackedScene" uid="uid://cr8ljerwlh3mh" path="res://Scenes/Car.tscn" id="1_jlwbg"]
 [ext_resource type="Script" uid="uid://hifry41mk1qo" path="res://Scripts/game_manager.gd" id="1_onbnv"]
 [ext_resource type="PackedScene" uid="uid://r0d141lg2pk5" path="res://Scenes/Building.tscn" id="2_g3g4i"]
+[ext_resource type="Script" uid="uid://dbidk6nojye6j" path="res://grass_puff_spawner.gd" id="2_ix1e5"]
 [ext_resource type="Texture2D" uid="uid://rhmwu6t2b8kd" path="res://Sprites/RoadTiles/RoadTilesAtlas.png" id="2_lulwx"]
+[ext_resource type="Texture2D" uid="uid://q3upigilc2c5" path="res://Sprites/GrassPuff1.png" id="3_4ykif"]
 [ext_resource type="PackedScene" uid="uid://ddm6vp0cbx0f4" path="res://Scenes/Mailbox.tscn" id="3_xxdj2"]
+[ext_resource type="Texture2D" uid="uid://codft0po2y0u8" path="res://Sprites/GrassPuff2.png" id="4_43vq4"]
+[ext_resource type="Texture2D" uid="uid://bnbghtksp1ndq" path="res://Sprites/GrassPuff3.png" id="5_d4kuo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ix1e5"]
 texture = ExtResource("2_lulwx")
@@ -62,6 +66,12 @@ autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+[node name="GrassPuffSpawner" type="Node2D" parent="." node_paths=PackedStringArray("roadTileMapLayer")]
+script = ExtResource("2_ix1e5")
+puffCount = 100
+puffSprites = Array[Texture2D]([ExtResource("3_4ykif"), ExtResource("4_43vq4"), ExtResource("5_d4kuo")])
+roadTileMapLayer = NodePath("../TileMapLayer")
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(-10, -91)
 tile_map_data = PackedByteArray("AAD///7/OgADAAAAAAD+////OgACAAEAAAD+/wAAOgACAAEAAAD9/wEAOgACAAAAAAD+/wIAOgADAAEAAAD+/wMAOgABAAEAAAD//wQAOgAAAAAAAAD+/wUAOgACAAIAAAD+/wYAOgABAAAAAAD//wYAOgABAAEAAAD//wcAOgABAAAAAAAAAAYAOgACAAEAAAAAAAUAOgACAAEAAAABAAQAOgACAAEAAAABAAMAOgACAAEAAAACAAIAOgAAAAAAAAABAAEAOgABAAEAAAABAAAAOgACAAAAAAABAP//OgAAAAAAAAABAP7/OgABAAEAAAAAAP3/OgADAAAAAAAAAP7/OgACAAEAAAD/////OgABAAAAAAD9/wUAOgABAAEAAAD9/wQAOgACAAAAAAD9/wMAOgACAAEAAAA=")
@@ -79,6 +89,22 @@ position = Vector2(-11, -152)
 position = Vector2(-218, -101)
 scale = Vector2(-1, 1)
 
+[node name="Building 7" parent="Buildings" instance=ExtResource("2_g3g4i")]
+position = Vector2(163, -23)
+scale = Vector2(-1, 1)
+
+[node name="Building 8" parent="Buildings" instance=ExtResource("2_g3g4i")]
+position = Vector2(118, -6)
+scale = Vector2(-1, 1)
+
+[node name="Building 9" parent="Buildings" instance=ExtResource("2_g3g4i")]
+position = Vector2(84, 16)
+scale = Vector2(-1, 1)
+
+[node name="Building 10" parent="Buildings" instance=ExtResource("2_g3g4i")]
+position = Vector2(28, 38)
+scale = Vector2(-1, 1)
+
 [node name="Building 3" parent="Buildings" instance=ExtResource("2_g3g4i")]
 position = Vector2(-125, -48)
 
@@ -86,7 +112,7 @@ position = Vector2(-125, -48)
 position = Vector2(242, -79)
 
 [node name="Building 4" parent="Buildings" instance=ExtResource("2_g3g4i")]
-position = Vector2(-79, -24)
+position = Vector2(-74, -27)
 
 [node name="Building 2" parent="Buildings" instance=ExtResource("2_g3g4i")]
 position = Vector2(-27, 0)
@@ -109,10 +135,45 @@ position = Vector2(-4, 20)
 rotation = 2.03223
 shape = SubResource("RectangleShape2D_1y0um")
 
+[node name="Mailbox4" parent="Mailboxes" instance=ExtResource("3_xxdj2")]
+position = Vector2(-120, -24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox4"]
+position = Vector2(-4, 20)
+rotation = 2.03223
+shape = SubResource("RectangleShape2D_1y0um")
+
 [node name="Mailbox3" parent="Mailboxes" instance=ExtResource("3_xxdj2")]
 position = Vector2(262, -50)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox3"]
+position = Vector2(-6, 22)
+rotation = 2.040224
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox5" parent="Mailboxes" instance=ExtResource("3_xxdj2")]
+position = Vector2(157, 0)
+scale = Vector2(-1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox5"]
+position = Vector2(-6, 22)
+rotation = 2.040224
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox6" parent="Mailboxes" instance=ExtResource("3_xxdj2")]
+position = Vector2(21, 65)
+scale = Vector2(-1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox6"]
+position = Vector2(-6, 22)
+rotation = 2.040224
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox7" parent="Mailboxes" instance=ExtResource("3_xxdj2")]
+position = Vector2(-237, -81)
+scale = Vector2(-1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox7"]
 position = Vector2(-6, 22)
 rotation = 2.040224
 shape = SubResource("RectangleShape2D_1y0um")
