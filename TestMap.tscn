@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=4 uid="uid://bv4e4ssw5lhku"]
 
 [ext_resource type="PackedScene" uid="uid://cr8ljerwlh3mh" path="res://Scenes/Car.tscn" id="1_jlwbg"]
-[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_onbnv"]
+[ext_resource type="Script" uid="uid://hifry41mk1qo" path="res://Scripts/game_manager.gd" id="1_onbnv"]
 [ext_resource type="PackedScene" uid="uid://r0d141lg2pk5" path="res://Scenes/Building.tscn" id="2_g3g4i"]
 [ext_resource type="Texture2D" uid="uid://rhmwu6t2b8kd" path="res://Sprites/RoadTiles/RoadTilesAtlas.png" id="2_lulwx"]
 [ext_resource type="PackedScene" uid="uid://ddm6vp0cbx0f4" path="res://Scenes/Mailbox.tscn" id="3_xxdj2"]
