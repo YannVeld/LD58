@@ -29,7 +29,7 @@ texture = ExtResource("2_e1atf")
 [node name="SpriteStack" parent="CharacterBody2D" instance=ExtResource("3_7iea3")]
 rotation = 1.5707964
 sprites = Array[Texture2D]([ExtResource("4_e1atf"), ExtResource("5_cewjx"), ExtResource("6_7iea3"), ExtResource("7_56b3i"), ExtResource("8_mloed"), ExtResource("9_vgdtx"), ExtResource("10_uvy3y"), ExtResource("11_k8vma"), ExtResource("12_pkjdc"), ExtResource("13_y0bmx")])
-offset = 1.25
+offset = 0.25
 reverseOrder = true
 layerCopies = 4
 

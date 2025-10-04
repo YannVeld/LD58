@@ -15,6 +15,17 @@ run/main_scene="uid://cwy8jco12cg6e"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/resizable=false
+window/stretch/mode="viewport"
+
+[editor]
+
+movie_writer/movie_file="D:/Documenten/GameDev/GodotGames/LD58/test.ogv"
+
 [global_group]
 
 Buildings=""
@@ -68,4 +79,5 @@ brake={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.19607843, 0.4509804, 0.27058825, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
