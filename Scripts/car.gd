@@ -77,6 +77,9 @@ func handle_collision():
 	print("Stunned for 2 sec" )
 	stunned = true
 	stun_timer.start()
+	
+func handle_mail_pickup():
+	print("mail received")
 
 func _on_stun_timer_timeout() -> void:
 	print("Unstunned now")
