@@ -11,7 +11,12 @@ size = Vector2(20, 62)
 [node name="TestMap" type="Node2D"]
 
 [node name="Game manager" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("1_onbnv")
+
+[node name="newCollectionTimer" type="Timer" parent="Game manager"]
+wait_time = 5.0
+autostart = true
 
 [node name="Background" type="Node" parent="."]
 
@@ -71,3 +76,5 @@ position = Vector2(397, -107)
 position = Vector2(-63, -1)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_xxdj2")
+
+[connection signal="timeout" from="Game manager/newCollectionTimer" to="Game manager" method="_on_new_collection_timer_timeout"]

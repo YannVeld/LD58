@@ -15,4 +15,9 @@ visible = false
 position = Vector2(0, -21)
 texture = ExtResource("3_nhb1q")
 
+[node name="collectionTimer" type="Timer" parent="."]
+wait_time = 7.5
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="collectionTimer" to="." method="_on_collection_timer_timeout"]
