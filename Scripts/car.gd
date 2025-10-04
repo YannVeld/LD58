@@ -10,12 +10,17 @@ extends CharacterBody2D
 @export var critical_speed_high = 150
 @export var traction_fast = 0.0
 @export var traction_slow = 0.7
+@export var on_collision_backward_velocity = 35
+
+@onready var stun_timer: Timer = $stunTimer
 
 var friction = -55/110.0
 var drag = -0.06
 
 var acceleration = Vector2.ZERO
 var steer_direction
+
+var stunned = false
 
 func get_input():
 	var turn = Input.get_axis("steer_left", "steer_right")
@@ -47,23 +52,32 @@ func calculate_steering(delta):
 	elif velocity.length()>critical_speed_low:
 		traction = traction_slow + (traction_fast-traction_slow)*(velocity.length() - critical_speed_low)/(critical_speed_high - critical_speed_low)
 
-	velocity = velocity.lerp(new_heading*velocity.length(), traction)
 	rotation = new_heading.angle()
-	
 	var d = new_heading.dot(velocity.normalized())
+	if d > 0:
+		velocity = velocity.lerp(new_heading*velocity.length(), traction)
 	if d < 0:
 		velocity = -new_heading * min(velocity.length(), max_speed_reverse)
 
 func _physics_process(delta: float) -> void:
-	acceleration = Vector2.ZERO
-	get_input()
-	apply_friction(delta)
-	#print(acceleration)
-	velocity += acceleration * delta
-	if velocity.length()>0:
-		calculate_steering(delta)
-	move_and_slide()
-	#print("velocity = ", velocity.length() )
+		acceleration = Vector2.ZERO
+		if not stunned:
+			get_input()
+		apply_friction(delta)
+		#print(acceleration)
+		velocity += acceleration * delta
+		if velocity.length()>0:
+			calculate_steering(delta)
+		move_and_slide()
+		#print("velocity = ", velocity.length() )
 
 func handle_collision():
+	velocity = -on_collision_backward_velocity*velocity.normalized()
 	print("omg! this car just collided with a building" )
+	print("Stunned for 2 sec" )
+	stunned = true
+	stun_timer.start()
+
+func _on_stun_timer_timeout() -> void:
+	print("Unstunned now")
+	stunned = false

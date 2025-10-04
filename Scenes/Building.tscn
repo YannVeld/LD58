@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://r0d141lg2pk5"]
 
-[ext_resource type="Script" uid="uid://nx6bt0oiyarw" path="res://Scripts/building.gd" id="1_1q4et"]
+[ext_resource type="Script" uid="uid://nx6bt0oiyarw" path="res://Scripts/stunzone.gd" id="1_1q4et"]
 [ext_resource type="Texture2D" uid="uid://8kgqf5gwwxvi" path="res://Sprites/brownBlock.png" id="1_33ows"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_33ows"]

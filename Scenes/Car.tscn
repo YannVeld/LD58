@@ -36,3 +36,9 @@ layerCopies = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_e1atf")
+
+[node name="stunTimer" type="Timer" parent="CharacterBody2D"]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="CharacterBody2D/stunTimer" to="CharacterBody2D" method="_on_stun_timer_timeout"]
