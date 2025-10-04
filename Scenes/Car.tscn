@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1wcokbk3mrqr"]
+
+[ext_resource type="Texture2D" uid="uid://euk13n5vuy58" path="res://Sprites/redSquare.png" id="1_5orbf"]
+[ext_resource type="Script" uid="uid://ylfclj4c2uk7" path="res://Scripts/movement.gd" id="1_8tfcp"]
+
+[node name="Car" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_8tfcp")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(3.375, 1.75)
+texture = ExtResource("1_5orbf")
