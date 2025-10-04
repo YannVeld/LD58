@@ -1,7 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1wcokbk3mrqr"]
+[gd_scene load_steps=16 format=3 uid="uid://c1wcokbk3mrqr"]
 
 [ext_resource type="Texture2D" uid="uid://euk13n5vuy58" path="res://Sprites/redSquare.png" id="1_5orbf"]
 [ext_resource type="Script" uid="uid://ylfclj4c2uk7" path="res://Scripts/movement.gd" id="1_8tfcp"]
+[ext_resource type="PackedScene" uid="uid://cjjrpk3rxk1m1" path="res://Scenes/sprite_stack.tscn" id="3_7iea3"]
+[ext_resource type="Texture2D" uid="uid://s3lgfvjc3lup" path="res://Sprites/PlaceholderCar/SpriteStackedCar_carOnly 1.png" id="3_cewjx"]
+[ext_resource type="Texture2D" uid="uid://bl5hhkaj4e82o" path="res://Sprites/PlaceholderCar/SpriteStackedCar_carOnly 2.png" id="4_7iea3"]
+[ext_resource type="Texture2D" uid="uid://280tehis2qch" path="res://Sprites/PlaceholderCar/SpriteStackedCar_carOnly 3.png" id="5_56b3i"]
+[ext_resource type="Texture2D" uid="uid://c171mpj3xhogp" path="res://Sprites/PlaceholderCar/SpriteStackedCar_carOnly 4.png" id="6_mloed"]
+[ext_resource type="Texture2D" uid="uid://xh01hhkgensl" path="res://Sprites/PlaceholderCar/SpriteStackedCar_carOnly 5.png" id="7_vgdtx"]
+[ext_resource type="Texture2D" uid="uid://cc5ioyife2va" path="res://Sprites/PlaceholderCar/SpriteStackedCar_carOnly 6.png" id="8_uvy3y"]
+[ext_resource type="Texture2D" uid="uid://cljem4sfbyutq" path="res://Sprites/PlaceholderCar/SpriteStackedCar_carOnly 7.png" id="9_k8vma"]
+[ext_resource type="Texture2D" uid="uid://dax3ifb5fvb66" path="res://Sprites/PlaceholderCar/SpriteStackedCar_carOnly 8.png" id="10_pkjdc"]
+[ext_resource type="Texture2D" uid="uid://cafnxujn8i1ri" path="res://Sprites/PlaceholderCar/SpriteStackedCar_carOnly 9.png" id="11_y0bmx"]
+[ext_resource type="Texture2D" uid="uid://uaja7c2htkxs" path="res://Sprites/PlaceholderCar/SpriteStackedCar_carOnly 10.png" id="12_0r10i"]
+[ext_resource type="Texture2D" uid="uid://bqwni1bqkcrsn" path="res://Sprites/PlaceholderCar/SpriteStackedCar_carOnly 11.png" id="13_532pt"]
+[ext_resource type="Texture2D" uid="uid://uj1ruvyky0ix" path="res://Sprites/PlaceholderCar/SpriteStackedCar_carOnly 12.png" id="14_phfw7"]
 
 [node name="Car" type="Node2D"]
 
@@ -9,5 +22,9 @@
 script = ExtResource("1_8tfcp")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+visible = false
 scale = Vector2(3.375, 1.75)
 texture = ExtResource("1_5orbf")
+
+[node name="SpriteStack" parent="CharacterBody2D" instance=ExtResource("3_7iea3")]
+sprites = Array[Texture2D]([ExtResource("3_cewjx"), ExtResource("4_7iea3"), ExtResource("5_56b3i"), ExtResource("6_mloed"), ExtResource("7_vgdtx"), ExtResource("8_uvy3y"), ExtResource("9_k8vma"), ExtResource("10_pkjdc"), ExtResource("11_y0bmx"), ExtResource("12_0r10i"), ExtResource("13_532pt"), ExtResource("14_phfw7")])

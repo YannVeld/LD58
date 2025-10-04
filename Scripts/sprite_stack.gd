@@ -18,6 +18,7 @@ func _ready() -> void:
 		sprite2d.texture = sprites[_n]
 		sprite2d.position.y -= offset * _n
 		sprite2d.scale = myScale
+		sprite2d.flip_h = true
 	
 		myRenderers[_n] = sprite2d
 	
