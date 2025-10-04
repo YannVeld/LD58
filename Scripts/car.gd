@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var wheel_base = 15
-@export var steering_angle = 10
+@export var steering_angle = 20
 @export var engine_power = 500
 @export var braking = -450
 @export var max_speed_reverse = 250
@@ -14,7 +14,7 @@ extends CharacterBody2D
 
 @onready var stun_timer: Timer = $stunTimer
 
-var friction = -55/110.0
+var friction = -55/110.0 * 3
 var drag = -0.06
 
 var acceleration = Vector2.ZERO

@@ -36,12 +36,32 @@ size = Vector2(20, 62)
 
 [node name="TestMap" type="Node2D"]
 
+[node name="UI Overlay" type="Node" parent="."]
+
+[node name="Score" type="Label" parent="UI Overlay"]
+offset_left = 237.0
+offset_top = -173.0
+offset_right = 289.0
+offset_bottom = -150.0
+text = "Score: "
+
+[node name="GameTime" type="Label" parent="UI Overlay"]
+offset_left = -303.0
+offset_top = -168.0
+offset_right = -263.0
+offset_bottom = -145.0
+
 [node name="Game manager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_onbnv")
 
 [node name="newCollectionTimer" type="Timer" parent="Game manager"]
-wait_time = 5.0
+wait_time = 3.5
+autostart = true
+
+[node name="gameTimer" type="Timer" parent="Game manager"]
+wait_time = 60.0
+one_shot = true
 autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -159,3 +179,4 @@ shape = SubResource("RectangleShape2D_1y0um")
 position = Vector2(-11, -92)
 
 [connection signal="timeout" from="Game manager/newCollectionTimer" to="Game manager" method="_on_new_collection_timer_timeout"]
+[connection signal="timeout" from="Game manager/gameTimer" to="Game manager" method="_on_game_timer_timeout"]
