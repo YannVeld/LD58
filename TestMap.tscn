@@ -59,6 +59,22 @@ position = Vector2(-11, -152)
 position = Vector2(-218, -101)
 scale = Vector2(-1, 1)
 
+[node name="Building 7" parent="Buildings" instance=ExtResource("2_g3g4i")]
+position = Vector2(163, -23)
+scale = Vector2(-1, 1)
+
+[node name="Building 8" parent="Buildings" instance=ExtResource("2_g3g4i")]
+position = Vector2(118, -6)
+scale = Vector2(-1, 1)
+
+[node name="Building 9" parent="Buildings" instance=ExtResource("2_g3g4i")]
+position = Vector2(84, 16)
+scale = Vector2(-1, 1)
+
+[node name="Building 10" parent="Buildings" instance=ExtResource("2_g3g4i")]
+position = Vector2(28, 38)
+scale = Vector2(-1, 1)
+
 [node name="Building 3" parent="Buildings" instance=ExtResource("2_g3g4i")]
 position = Vector2(-125, -48)
 
@@ -66,7 +82,7 @@ position = Vector2(-125, -48)
 position = Vector2(242, -79)
 
 [node name="Building 4" parent="Buildings" instance=ExtResource("2_g3g4i")]
-position = Vector2(-79, -24)
+position = Vector2(-74, -27)
 
 [node name="Building 2" parent="Buildings" instance=ExtResource("2_g3g4i")]
 position = Vector2(-27, 0)
@@ -89,10 +105,45 @@ position = Vector2(-4, 20)
 rotation = 2.03223
 shape = SubResource("RectangleShape2D_1y0um")
 
+[node name="Mailbox4" parent="Mailboxes" instance=ExtResource("3_xxdj2")]
+position = Vector2(-120, -24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox4"]
+position = Vector2(-4, 20)
+rotation = 2.03223
+shape = SubResource("RectangleShape2D_1y0um")
+
 [node name="Mailbox3" parent="Mailboxes" instance=ExtResource("3_xxdj2")]
 position = Vector2(262, -50)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox3"]
+position = Vector2(-6, 22)
+rotation = 2.040224
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox5" parent="Mailboxes" instance=ExtResource("3_xxdj2")]
+position = Vector2(157, 0)
+scale = Vector2(-1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox5"]
+position = Vector2(-6, 22)
+rotation = 2.040224
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox6" parent="Mailboxes" instance=ExtResource("3_xxdj2")]
+position = Vector2(21, 65)
+scale = Vector2(-1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox6"]
+position = Vector2(-6, 22)
+rotation = 2.040224
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox7" parent="Mailboxes" instance=ExtResource("3_xxdj2")]
+position = Vector2(-237, -81)
+scale = Vector2(-1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox7"]
 position = Vector2(-6, 22)
 rotation = 2.040224
 shape = SubResource("RectangleShape2D_1y0um")
