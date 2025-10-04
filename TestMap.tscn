@@ -176,7 +176,7 @@ rotation = 2.040224
 shape = SubResource("RectangleShape2D_1y0um")
 
 [node name="Car" parent="." instance=ExtResource("1_jlwbg")]
-position = Vector2(-11, -92)
+position = Vector2(-9, -93)
 
 [connection signal="timeout" from="Game manager/newCollectionTimer" to="Game manager" method="_on_new_collection_timer_timeout"]
 [connection signal="timeout" from="Game manager/gameTimer" to="Game manager" method="_on_game_timer_timeout"]

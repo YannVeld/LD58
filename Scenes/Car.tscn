@@ -36,7 +36,7 @@ position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_e1atf")
 
 [node name="stunTimer" type="Timer" parent="CharacterBody2D"]
-wait_time = 2.0
+wait_time = 0.5
 one_shot = true
 
 [connection signal="timeout" from="CharacterBody2D/stunTimer" to="CharacterBody2D" method="_on_stun_timer_timeout"]
