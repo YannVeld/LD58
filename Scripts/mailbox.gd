@@ -3,7 +3,11 @@ extends Area2D
 @onready var gameManager = %"Game manager"
 var isActive=false
 @onready var ready_marker: Sprite2D = $readyMarker
+@onready var mailboxRenderer: Sprite2D = $mailBoxRenderer
 var given_idx : int
+
+@export var activeSprite: Texture2D
+@export var deactiveSprite: Texture2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,6 +17,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	ready_marker.visible = isActive
+	mailboxRenderer.texture = activeSprite if isActive else deactiveSprite
+	
 	if isActive:
 		var scale = ($collectionTimer.time_left/$collectionTimer.wait_time)
 		ready_marker.scale.x = scale

@@ -57,9 +57,6 @@ position = Vector2(-10, -91)
 tile_map_data = PackedByteArray("AAD///7/OgADAAAAAAD+////OgACAAEAAAD+/wAAOgACAAEAAAD9/wEAOgACAAAAAAD+/wIAOgADAAEAAAD+/wMAOgABAAEAAAD//wQAOgAAAAAAAAD+/wUAOgACAAIAAAD+/wYAOgABAAAAAAD//wYAOgABAAEAAAD//wcAOgABAAAAAAAAAAYAOgACAAEAAAAAAAUAOgACAAEAAAABAAQAOgACAAEAAAABAAMAOgACAAEAAAACAAIAOgAAAAAAAAABAAEAOgABAAEAAAABAAAAOgACAAAAAAABAP//OgAAAAAAAAABAP7/OgABAAEAAAAAAP3/OgADAAAAAAAAAP7/OgACAAEAAAD/////OgABAAAAAAD9/wUAOgABAAEAAAD9/wQAOgACAAAAAAD9/wMAOgACAAEAAAA=")
 tile_set = SubResource("TileSet_hvnfr")
 
-[node name="Car" parent="." instance=ExtResource("1_jlwbg")]
-position = Vector2(-11, -92)
-
 [node name="Buildings" type="Node" parent="."]
 
 [node name="Building 5" parent="Buildings" instance=ExtResource("2_g3g4i")]
@@ -157,5 +154,8 @@ scale = Vector2(-1, 1)
 position = Vector2(-6, 22)
 rotation = 2.040224
 shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Car" parent="." instance=ExtResource("1_jlwbg")]
+position = Vector2(-11, -92)
 
 [connection signal="timeout" from="Game manager/newCollectionTimer" to="Game manager" method="_on_new_collection_timer_timeout"]
