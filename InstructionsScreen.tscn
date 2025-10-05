@@ -29,11 +29,11 @@ offset_left = -277.0
 offset_top = -138.0
 offset_right = 273.0
 offset_bottom = 95.0
-text = "You are a mailman and you must pick up as much mail as possible before time runs out.
+text = "Oh no! You're a mailman and you slept in until the afternoon.  You have one minute left to collect all the city's mail. 
 
 Press Up/W to hit the gas, Down/S to brake or reverse, and Left/A and Right/D to turn.
 
-Try not to ding the car"
+Down coffee along the way for a speed boost and grab the magical clocks to turn back time."
 wrap_mode = 1
 
 [connection signal="pressed" from="Buttons/Back" to="." method="_on_back_pressed"]
