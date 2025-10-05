@@ -13,6 +13,12 @@ extends CharacterBody2D
 @export var on_collision_backward_velocity = 35
 
 @onready var stun_timer: Timer = $stunTimer
+@onready var mainCamera = $"../../Camera2D" #Ugly!
+
+@export_group("Screen shake")
+@export var shakeDuration: float = 0.5
+@export var shakeMagintude: float = 5
+
 
 var friction = -55/110.0 * 3
 var drag = -0.06
@@ -77,6 +83,8 @@ func handle_collision():
 	print("Stunned for 2 sec" )
 	stunned = true
 	stun_timer.start()
+	
+	mainCamera.shake(shakeDuration, shakeMagintude)
 	
 func handle_mail_pickup():
 	print("mail received")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://bv4e4ssw5lhku"]
+[gd_scene load_steps=15 format=4 uid="uid://bv4e4ssw5lhku"]
 
 [ext_resource type="PackedScene" uid="uid://cr8ljerwlh3mh" path="res://Scenes/Car.tscn" id="1_jlwbg"]
 [ext_resource type="Script" uid="uid://hifry41mk1qo" path="res://Scripts/game_manager.gd" id="1_onbnv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dbidk6nojye6j" path="res://Scripts/grass_puff_spawner.gd" id="2_ix1e5"]
 [ext_resource type="Texture2D" uid="uid://rhmwu6t2b8kd" path="res://Sprites/RoadTiles/RoadTilesAtlas.png" id="2_lulwx"]
 [ext_resource type="Texture2D" uid="uid://q3upigilc2c5" path="res://Sprites/GrassPuff1.png" id="3_4ykif"]
+[ext_resource type="Script" uid="uid://oibyg4q57ab3" path="res://Scripts/camera_shaker.gd" id="3_d4kuo"]
 [ext_resource type="PackedScene" uid="uid://ddm6vp0cbx0f4" path="res://Scenes/Mailbox.tscn" id="3_xxdj2"]
 [ext_resource type="Texture2D" uid="uid://codft0po2y0u8" path="res://Sprites/GrassPuff2.png" id="4_43vq4"]
 [ext_resource type="Texture2D" uid="uid://bnbghtksp1ndq" path="res://Sprites/GrassPuff3.png" id="5_d4kuo"]
@@ -68,6 +69,7 @@ one_shot = true
 autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_d4kuo")
 
 [node name="GrassPuffSpawner" type="Node2D" parent="." node_paths=PackedStringArray("roadTileMapLayer")]
 z_index = -100

@@ -14,15 +14,19 @@
 [ext_resource type="Texture2D" uid="uid://bpl7bud82nx0y" path="res://Sprites/VoxelCar/09_VoxelCarSlices.png" id="13_y0bmx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1atf"]
-size = Vector2(20, 13)
+size = Vector2(16, 6)
 
 [node name="Car" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_8tfcp")
+shakeDuration = 0.2
+shakeMagintude = 3.0
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-scale = Vector2(2, 0.87499994)
+visible = false
+rotation = 1.5707964
+texture = ExtResource("10_uvy3y")
 
 [node name="SpriteStack" parent="CharacterBody2D" instance=ExtResource("3_7iea3")]
 rotation = 1.5707964
@@ -32,7 +36,6 @@ reverseOrder = true
 layerCopies = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_e1atf")
 
 [node name="stunTimer" type="Timer" parent="CharacterBody2D"]
