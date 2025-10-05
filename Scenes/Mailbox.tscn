@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cws020m0vvuio" path="res://Scripts/set_zindex_from_ypos.gd" id="4_21o3w"]
 
 [node name="Mailbox" type="Area2D"]
+collision_layer = 2
 script = ExtResource("1_gqu8m")
 activeSprite = ExtResource("2_nhb1q")
 deactiveSprite = ExtResource("3_21o3w")

@@ -164,33 +164,78 @@ func _physics_process(delta: float) -> void:
 	_do_fake_drifting()
 	#print("velocity = ", velocity.length() )
 
-func handle_collision():
-	velocity = -on_collision_backward_velocity*velocity.normalized()
-	print("omg! this car just collided with a building" )
-	print("Stunned for 2 sec" )
-	stunned = true
-	stun_timer.start()
+func handle_collision(object: Area2D):
+	var _ray_length = 16
 	
-	mainCamera.shake(collisionShakeDuration, collisionShakeDuration)
+	var space_state = get_world_2d().direct_space_state
+	var ray = velocity.normalized() * _ray_length
+	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + ray)
+	query.collide_with_areas = true
+	query.set_collision_mask(1)
+	var result = space_state.intersect_ray(query)
+	
+	# Head on collision
+	if result:
+		velocity = -on_collision_backward_velocity*velocity.normalized()
+		stunned = true
+		stun_timer.start()
+		mainCamera.shake(collisionShakeDuration, collisionShakeDuration)
+		return
+		
+	# Check for gracing wall to the right
+	var ray_right = ray.rotated(PI/4)
+	query = PhysicsRayQueryParameters2D.create(global_position, global_position + ray_right)
+	query.collide_with_areas = true
+	query.set_collision_mask(1)
+	result = space_state.intersect_ray(query)
+	if result:
+		var coll_pos = result.position
+		var vecToColl = (coll_pos - global_position).normalized()
+		var _ang = vecToColl.angle_to(velocity.normalized())
+		rotate(_ang)
+		return
+	
+	# Check for gracing wall to the left
+	var ray_left = ray.rotated(-PI/4)
+	query = PhysicsRayQueryParameters2D.create(global_position, global_position + ray_left)
+	query.collide_with_areas = true
+	query.set_collision_mask(1)
+	result = space_state.intersect_ray(query)
+	if result:
+		var coll_pos = result.position
+		var vecToColl = (coll_pos - global_position).normalized()
+		var _ang = vecToColl.angle_to(velocity.normalized())
+		rotate(_ang)
+		return
+	
+	
+	#velocity = -on_collision_backward_velocity*velocity.normalized()
+	#print("omg! this car just collided with ", object )
+	#stunned = true
+	#stun_timer.start()
+#
+	#mainCamera.shake(collisionShakeDuration, collisionShakeDuration)
+	
 	
 func handle_mail_pickup():
-	print("mail received")
+	#print("mail received")
+	pass
 
 func _on_stun_timer_timeout() -> void:
-	print("Unstunned now")
+	#print("Unstunned now")
 	stunned = false
 	
 func pickup(type: String, pickup: Node2D):
-	print('detected pickup')
+	#print('detected pickup')
 	if type=='Extra Time':
-		print('extra time' )
+		#print('extra time' )
 		game_manager.add_time()
 		
 		timeBoostParticleEmitter.global_position = pickup.get_parent().global_position
 		timeBoostParticleEmitter.restart()
 		
 	elif type=='Speed Up':
-		print("Speed up activated")
+		#print("Speed up activated")
 		_current_engine_power = base_engine_power + bonus_engine_power
 		speedupTimer = Timer.new()
 		add_child(speedupTimer)
@@ -205,10 +250,10 @@ func pickup(type: String, pickup: Node2D):
 		mainCamera.shake(boostPickupShakeDuration, boostPickupShakeMagnitude)
 		
 	else:
-		print("Something is wrong with the powerup")
+		print("WARNING: Something is wrong with the powerup")
 
 func _on_timer_timeout() -> void:
-	print("Speed up deactivated")
+	#print("Speed up deactivated")
 	_current_engine_power = base_engine_power
 	# How to delete speedupTimer?
 
