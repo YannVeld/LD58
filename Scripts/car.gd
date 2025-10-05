@@ -27,6 +27,11 @@ extends CharacterBody2D
 @export var boostPickupShakeDuration: float = 0.2
 @export var boostPickupShakeMagnitude: float = 3.0
 
+@export var fakeDriftingMinSpeed: float = 100
+@export var fakeDriftingAngle: float = 10
+@export var fakeDriftingHoldTime: float = 0.5
+@export_range(0,1) var fakeDriftingSmoothing: float = 0.5
+
 
 @onready var stun_timer: Timer = $stunTimer
 @onready var mainCamera = $"../../Camera2D" #Ugly!
@@ -34,6 +39,8 @@ extends CharacterBody2D
 @onready var speedBoostParticleEmitter: GPUParticles2D = $"../../Game manager/SpeedPickupParticles"
 @onready var timeBoostParticleEmitter: GPUParticles2D = $"../../Game manager/TimePickupParticles"
 @onready var carFireParticleEmitter: GPUParticles2D = $"../FireParticleEmitter"
+@onready var spriteStack: Node2D = $SpriteStack
+@onready var spriteStackBaseAngle = spriteStack.get_rotation_degrees()
 
 var friction = -55/110.0 * 3
 var drag = -0.06
@@ -54,7 +61,7 @@ var _steer_input = 0
 
 
 
-func get_input(delta: float):
+func _get_input(delta: float):
 	var turn = Input.get_axis("steer_left", "steer_right")
 	if (sign(turn) == sign(_steer_input)) and (abs(turn) > 0.1):
 		_timeSinceSteerPress += delta
@@ -72,7 +79,7 @@ func _calculate_steering_angle() -> float:
 	
 	return _angle
 	
-func do_steering():
+func _handle_player_input():
 	var _steering_angle = _calculate_steering_angle()
 	steer_direction = _steer_input * deg_to_rad(_steering_angle)
 	#print(steer_direction)
@@ -110,17 +117,38 @@ func calculate_steering(delta):
 	if d < 0:
 		velocity = -new_heading * min(velocity.length(), max_speed_reverse)
 
+func _get_fake_drift_angle() -> float:
+	var _turn = Input.get_axis("steer_left", "steer_right")
+
+	if Input.is_action_pressed("brake"): return spriteStackBaseAngle
+	if abs(_turn) < 0.1: return spriteStackBaseAngle
+	if velocity.length() < fakeDriftingMinSpeed: return spriteStackBaseAngle
+
+	var _frac = _timeSinceSteerPress / fakeDriftingHoldTime
+	_frac = clampf(_frac, 0, 1)
+	var _extraAngle = lerpf(0, fakeDriftingAngle, _frac)
+	return spriteStackBaseAngle + sign(_turn) * _extraAngle
+
+func _do_fake_drifting() -> void:
+	var _targetAngle = _get_fake_drift_angle()
+	var _currentAngle = spriteStack.get_rotation_degrees()
+	var _newAngle = lerpf( _currentAngle, _targetAngle, fakeDriftingSmoothing )
+	spriteStack.set_rotation_degrees(_newAngle)
+	
+
 func _physics_process(delta: float) -> void:
 	acceleration = Vector2.ZERO
 	if not stunned:
-		get_input(delta)
-		do_steering()
+		_get_input(delta)
+		_handle_player_input()
 	apply_friction(delta)
 	#print(acceleration)
 	velocity += acceleration * delta
 	if velocity.length()>0:
 		calculate_steering(delta)
 	move_and_slide()
+	
+	_do_fake_drifting()
 	#print("velocity = ", velocity.length() )
 
 func handle_collision():

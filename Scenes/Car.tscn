@@ -54,9 +54,12 @@ scale_curve = SubResource("CurveTexture_tjev1")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_8tfcp")
-tight_steering_angle_bonus = 20
+tight_steering_angle_bonus = 30
+key_holdtime_tight_steering = 3
 boostPickupShakeDuration = 2.0
 boostPickupShakeMagnitude = 2.0
+fakeDriftingAngle = 45.0
+fakeDriftingSmoothing = 0.2
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 visible = false
