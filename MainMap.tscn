@@ -1,0 +1,441 @@
+[gd_scene load_steps=31 format=4 uid="uid://c42dpnccxkfab"]
+
+[ext_resource type="Texture2D" uid="uid://cu26ucumncc1l" path="res://Sprites/Speedometer.png" id="1_57nyl"]
+[ext_resource type="Texture2D" uid="uid://d4k3hnooeibql" path="res://Sprites/Speedometer_indicator.png" id="2_pkdq6"]
+[ext_resource type="Script" uid="uid://iygveoybec2n" path="res://Scripts/speed_indicator.gd" id="3_qrjo1"]
+[ext_resource type="Texture2D" uid="uid://b2ita7muh0qmv" path="res://Sprites/TimerUI.png" id="4_5mpjp"]
+[ext_resource type="FontFile" uid="uid://dlvhgtbpfmmr0" path="res://Fonts/m5x7.ttf" id="5_r5iyf"]
+[ext_resource type="FontFile" uid="uid://cn4n80ikqjwnu" path="res://Fonts/m6x11.ttf" id="6_wcwa3"]
+[ext_resource type="Script" uid="uid://hifry41mk1qo" path="res://Scripts/game_manager.gd" id="7_cnnge"]
+[ext_resource type="Script" uid="uid://bnlmexfwxaefa" path="res://Scripts/powerup_spawner.gd" id="8_0rddn"]
+[ext_resource type="Texture2D" uid="uid://btcnpmb0axnld" path="res://Sprites/PickupParticle.png" id="9_53nem"]
+[ext_resource type="Texture2D" uid="uid://c0oij7uwp4pnf" path="res://Sprites/PickupParticle_yellow.png" id="10_56bqw"]
+[ext_resource type="Script" uid="uid://oibyg4q57ab3" path="res://Scripts/camera_shaker.gd" id="11_nlfjb"]
+[ext_resource type="Script" uid="uid://dbidk6nojye6j" path="res://Scripts/grass_puff_spawner.gd" id="12_jyihd"]
+[ext_resource type="Texture2D" uid="uid://q3upigilc2c5" path="res://Sprites/GrassPuff1.png" id="13_mtmou"]
+[ext_resource type="Texture2D" uid="uid://codft0po2y0u8" path="res://Sprites/GrassPuff2.png" id="14_8dafi"]
+[ext_resource type="Texture2D" uid="uid://bnbghtksp1ndq" path="res://Sprites/GrassPuff3.png" id="15_ealr7"]
+[ext_resource type="Texture2D" uid="uid://rhmwu6t2b8kd" path="res://Sprites/RoadTiles/RoadTilesAtlas.png" id="16_c4cqr"]
+[ext_resource type="PackedScene" uid="uid://r0d141lg2pk5" path="res://Scenes/Building.tscn" id="17_3lbbi"]
+[ext_resource type="PackedScene" uid="uid://ddm6vp0cbx0f4" path="res://Scenes/Mailbox.tscn" id="18_xtcp7"]
+[ext_resource type="PackedScene" uid="uid://cr8ljerwlh3mh" path="res://Scenes/Car.tscn" id="19_ek034"]
+[ext_resource type="Script" uid="uid://nx6bt0oiyarw" path="res://Scripts/stunzone.gd" id="20_02i7e"]
+
+[sub_resource type="Curve" id="Curve_upqcn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5888889, 1), 0.0, 0.0, 0, 0, Vector2(0.9944445, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6sdbt"]
+curve = SubResource("Curve_upqcn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cw3un"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 5.45
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+spread = 180.0
+initial_velocity_min = 80.0
+initial_velocity_max = 90.0
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = -2.2351742e-05
+gravity = Vector3(0, -20, 0)
+radial_accel_min = -90.0
+radial_accel_max = -60.0
+tangential_accel_min = -2.2351742e-06
+tangential_accel_max = -2.2351742e-06
+damping_min = 10.0
+damping_max = 20.0
+scale_curve = SubResource("CurveTexture_6sdbt")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ix1e5"]
+texture = ExtResource("16_c4cqr")
+texture_region_size = Vector2i(108, 54)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hvnfr"]
+tile_shape = 1
+tile_size = Vector2i(108, 54)
+sources/58 = SubResource("TileSetAtlasSource_ix1e5")
+tile_proxies/coords_level = [[0, Vector2i(0, 0)], [11, Vector2i(0, 0)], [1, Vector2i(0, 0)], [11, Vector2i(1, 0)], [2, Vector2i(0, 0)], [11, Vector2i(2, 0)], [3, Vector2i(0, 0)], [11, Vector2i(3, 0)], [4, Vector2i(0, 0)], [11, Vector2i(0, 1)], [5, Vector2i(0, 0)], [11, Vector2i(1, 1)], [6, Vector2i(0, 0)], [11, Vector2i(2, 1)], [7, Vector2i(0, 0)], [11, Vector2i(3, 1)], [8, Vector2i(0, 0)], [11, Vector2i(0, 2)], [9, Vector2i(0, 0)], [11, Vector2i(1, 2)], [10, Vector2i(0, 0)], [11, Vector2i(2, 2)], [12, Vector2i(0, 0)], [23, Vector2i(0, 0)], [13, Vector2i(0, 0)], [23, Vector2i(1, 0)], [14, Vector2i(0, 0)], [23, Vector2i(2, 0)], [15, Vector2i(0, 0)], [23, Vector2i(3, 0)], [16, Vector2i(0, 0)], [23, Vector2i(0, 1)], [17, Vector2i(0, 0)], [23, Vector2i(1, 1)], [18, Vector2i(0, 0)], [23, Vector2i(2, 1)], [19, Vector2i(0, 0)], [23, Vector2i(3, 1)], [20, Vector2i(0, 0)], [23, Vector2i(0, 2)], [21, Vector2i(0, 0)], [23, Vector2i(1, 2)], [22, Vector2i(0, 0)], [23, Vector2i(2, 2)], [47, Vector2i(0, 0)], [58, Vector2i(0, 0)], [48, Vector2i(0, 0)], [58, Vector2i(1, 0)], [49, Vector2i(0, 0)], [58, Vector2i(2, 0)], [50, Vector2i(0, 0)], [58, Vector2i(3, 0)], [51, Vector2i(0, 0)], [58, Vector2i(0, 1)], [52, Vector2i(0, 0)], [58, Vector2i(1, 1)], [53, Vector2i(0, 0)], [58, Vector2i(2, 1)], [54, Vector2i(0, 0)], [58, Vector2i(3, 1)], [55, Vector2i(0, 0)], [58, Vector2i(0, 2)], [56, Vector2i(0, 0)], [58, Vector2i(1, 2)], [57, Vector2i(0, 0)], [58, Vector2i(2, 2)]]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1y0um"]
+size = Vector2(58.583736, 18.432583)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0eg8n"]
+distance = -181.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wvj8d"]
+normal = Vector2(0, 1)
+distance = -181.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_upqcn"]
+normal = Vector2(1, 0)
+distance = -319.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cw3un"]
+normal = Vector2(-1, 0)
+distance = -321.0
+
+[node name="TestMap" type="Node2D"]
+
+[node name="UI Overlay" type="Node" parent="."]
+
+[node name="Speedometer" type="Sprite2D" parent="UI Overlay"]
+z_index = 1000
+position = Vector2(-320, 199)
+texture = ExtResource("1_57nyl")
+offset = Vector2(56, -56)
+
+[node name="SpeedIndicator" type="Sprite2D" parent="UI Overlay/Speedometer"]
+z_index = 1001
+position = Vector2(56, -56)
+rotation = 2.300344
+texture = ExtResource("2_pkdq6")
+script = ExtResource("3_qrjo1")
+min_angle = -130.0
+max_angle = 130.0
+min_speed_show = 25.0
+max_speed_show = 180.0
+rotation_smoothing = 0.2
+
+[node name="TimerAndScore" type="Sprite2D" parent="UI Overlay"]
+z_index = 1000
+position = Vector2(320, 198)
+texture = ExtResource("4_5mpjp")
+offset = Vector2(-56, -56)
+
+[node name="Score" type="Label" parent="UI Overlay"]
+z_index = 1200
+offset_left = 267.0
+offset_top = 157.0
+offset_right = 319.0
+offset_bottom = 180.0
+theme_override_fonts/font = ExtResource("5_r5iyf")
+text = "99"
+
+[node name="GameTime" type="Label" parent="UI Overlay"]
+z_index = 1200
+offset_left = 245.0
+offset_top = 128.0
+offset_right = 285.0
+offset_bottom = 151.0
+theme_override_fonts/font = ExtResource("6_wcwa3")
+theme_override_font_sizes/font_size = 16
+text = "9:99"
+horizontal_alignment = 1
+
+[node name="Game manager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7_cnnge")
+minimalDistToCarForMailboxActivation = 128.0
+
+[node name="newCollectionTimer" type="Timer" parent="Game manager"]
+wait_time = 3.5
+autostart = true
+
+[node name="gameTimer" type="Timer" parent="Game manager"]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="PowerupSpawner" type="Node2D" parent="." node_paths=PackedStringArray("timePickupPositionNodes", "speedPickupPositionNodes")]
+script = ExtResource("8_0rddn")
+timePickupPositionNodes = [NodePath("TimePickupPosition"), NodePath("TimePickupPosition2")]
+speedPickupPositionNodes = [NodePath("SpeedPickupPosition"), NodePath("SpeedPickupPosition2")]
+
+[node name="TimePickupPosition" type="Node2D" parent="PowerupSpawner"]
+position = Vector2(-221, -94)
+
+[node name="TimePickupPosition2" type="Node2D" parent="PowerupSpawner"]
+position = Vector2(178, 83)
+
+[node name="SpeedPickupPosition" type="Node2D" parent="PowerupSpawner"]
+position = Vector2(-226, 68)
+
+[node name="SpeedPickupPosition2" type="Node2D" parent="PowerupSpawner"]
+position = Vector2(160, -62)
+
+[node name="newPowerupTimer" type="Timer" parent="PowerupSpawner"]
+wait_time = 10.0
+autostart = true
+
+[node name="SpeedPickupParticles" type="GPUParticles2D" parent="PowerupSpawner"]
+z_index = -5
+emitting = false
+amount = 50
+amount_ratio = 0.8
+texture = ExtResource("9_53nem")
+one_shot = true
+explosiveness = 0.9
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_cw3un")
+
+[node name="TimePickupParticles" type="GPUParticles2D" parent="PowerupSpawner"]
+z_index = -5
+emitting = false
+amount = 50
+amount_ratio = 0.8
+texture = ExtResource("10_56bqw")
+one_shot = true
+explosiveness = 0.9
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_cw3un")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("11_nlfjb")
+
+[node name="GrassPuffSpawner" type="Node2D" parent="." node_paths=PackedStringArray("roadTileMapLayer")]
+z_index = -100
+script = ExtResource("12_jyihd")
+puffCount = 100
+puffSprites = Array[Texture2D]([ExtResource("13_mtmou"), ExtResource("14_8dafi"), ExtResource("15_ealr7")])
+roadTileMapLayer = NodePath("../TileMapLayer")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = -100
+position = Vector2(-10, -91)
+tile_map_data = PackedByteArray("AAD///7/OgACAAEAAAD+////OgABAAIAAAD9/wEAOgABAAEAAAD+/wYAOgABAAAAAAAAAAYAOgADAAAAAAABAAMAOgACAAAAAAACAAIAOgAAAAAAAAABAAEAOgABAAEAAAABAAAAOgACAAAAAAABAP//OgAAAAAAAAABAP7/OgABAAEAAAAAAP3/OgADAAAAAAAAAP7/OgABAAAAAAD9/wUAOgABAAEAAAD9/wQAOgACAAAAAAD9/wMAOgACAAEAAAD//wcAOgABAAAAAAD+/wUAOgACAAIAAAD//wQAOgACAAEAAAD//wMAOgACAAEAAAAAAAIAOgAAAAAAAAD//wEAOgABAAEAAAD//wAAOgADAAEAAAD///3/OgADAAAAAAD+/wIAOgAAAAIAAAD//wYAOgABAAEAAAACAAQAOgAAAAAAAAABAAUAOgACAAEAAAABAAYAOgACAAEAAAAAAAcAOgABAAAAAAD+/wEAOgACAAEAAAD9////OgACAAEAAAD+//7/OgADAAAAAAD9/wAAOgACAAAAAAA=")
+tile_set = SubResource("TileSet_hvnfr")
+
+[node name="Buildings" type="Node" parent="."]
+
+[node name="Building" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(-18, -110)
+
+[node name="Building2" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(28, -87)
+
+[node name="Building3" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(67, -65)
+
+[node name="Building4" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(109, -44)
+
+[node name="Building6" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(204, -159)
+
+[node name="Building7" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(244, -137)
+
+[node name="Building8" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(249, -79)
+
+[node name="Building9" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(289, -59)
+
+[node name="Building11" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(-120, -156)
+
+[node name="Building13" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(-18, 57)
+
+[node name="Building14" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(165, 22)
+scale = Vector2(-1, 1)
+
+[node name="Building15" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(134, 43)
+scale = Vector2(-1, 1)
+
+[node name="Building16" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(88, 58)
+scale = Vector2(-1, 1)
+
+[node name="Building17" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(-226, -154)
+scale = Vector2(-1, 1)
+
+[node name="Building18" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(-266, -136)
+scale = Vector2(-1, 1)
+
+[node name="Building19" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(-308, -113)
+scale = Vector2(-1, 1)
+
+[node name="Building23" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(-280, -25)
+scale = Vector2(-1, 1)
+
+[node name="Building20" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(-59, -28)
+scale = Vector2(-1, 1)
+
+[node name="Building21" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(-95, -10)
+scale = Vector2(-1, 1)
+
+[node name="Building22" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(-135, 12)
+scale = Vector2(-1, 1)
+
+[node name="Building12" parent="Buildings" instance=ExtResource("17_3lbbi")]
+position = Vector2(-187, 26)
+
+[node name="Mailboxes" type="Node" parent="."]
+
+[node name="Mailbox" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
+position = Vector2(-18, -83)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox"]
+position = Vector2(-13, 25)
+rotation = -0.85836256
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox8" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
+position = Vector2(-20, 79)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox8"]
+position = Vector2(-8, 20)
+rotation = -0.85836256
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox12" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
+position = Vector2(-184, 50)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox12"]
+position = Vector2(-8, 20)
+rotation = -0.85836256
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox13" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
+position = Vector2(-117, -133)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox13"]
+position = Vector2(-8, 20)
+rotation = -0.85836256
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox2" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
+position = Vector2(24, -61)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox2"]
+position = Vector2(-11, 22)
+rotation = -0.85836256
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox3" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
+position = Vector2(204, -131)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox3"]
+position = Vector2(-8, 20)
+rotation = -0.85836256
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox4" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
+position = Vector2(246, -58)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox4"]
+position = Vector2(-8, 20)
+rotation = -0.85836256
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox5" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
+position = Vector2(290, -34)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox5"]
+position = Vector2(-8, 20)
+rotation = -0.85836256
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox6" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
+position = Vector2(202, 31)
+scale = Vector2(-1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox6"]
+position = Vector2(-8, 20)
+rotation = -0.85836256
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox9" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
+position = Vector2(-54, 0)
+scale = Vector2(-1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox9"]
+position = Vector2(-8, 20)
+rotation = -0.85836256
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox10" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
+position = Vector2(-98, 22)
+scale = Vector2(-1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox10"]
+position = Vector2(-8, 20)
+rotation = -0.85836256
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox14" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
+position = Vector2(-222, -133)
+scale = Vector2(-1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox14"]
+position = Vector2(-8, 20)
+rotation = -0.85836256
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox15" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
+position = Vector2(-263, -113)
+scale = Vector2(-1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox15"]
+position = Vector2(-8, 20)
+rotation = -0.85836256
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox11" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
+position = Vector2(-146, 41)
+scale = Vector2(-1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox11"]
+position = Vector2(-8, 20)
+rotation = -0.85836256
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Mailbox7" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
+position = Vector2(99, 79)
+scale = Vector2(-1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox7"]
+position = Vector2(-8, 20)
+rotation = -0.85836256
+shape = SubResource("RectangleShape2D_1y0um")
+
+[node name="Car" parent="." instance=ExtResource("19_ek034")]
+unique_name_in_owner = true
+position = Vector2(43, 101)
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("20_02i7e")
+
+[node name="WorldBoundary_bottom" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 10)
+shape = SubResource("WorldBoundaryShape2D_0eg8n")
+
+[node name="WorldBoundary_top" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -10)
+shape = SubResource("WorldBoundaryShape2D_wvj8d")
+
+[node name="WorldBoundary_left" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-10, 0)
+shape = SubResource("WorldBoundaryShape2D_upqcn")
+
+[node name="WorldBoundary_right" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(10, 0)
+shape = SubResource("WorldBoundaryShape2D_cw3un")
+
+[connection signal="timeout" from="Game manager/newCollectionTimer" to="Game manager" method="_on_new_collection_timer_timeout"]
+[connection signal="timeout" from="Game manager/gameTimer" to="Game manager" method="_on_game_timer_timeout"]
+[connection signal="timeout" from="PowerupSpawner/newPowerupTimer" to="PowerupSpawner" method="_on_new_powerup_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

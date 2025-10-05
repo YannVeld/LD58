@@ -1,7 +1,7 @@
 extends Node2D
 
-@export var timePickupPositionNode: Node2D
-@export var speedPickupPositionNode: Node2D
+@export var timePickupPositionNodes: Array[Node2D]
+@export var speedPickupPositionNodes: Array[Node2D]
 
 @onready var new_powerup_timer: Timer = $newPowerupTimer
 
@@ -16,14 +16,14 @@ func activate_powerup():
 		var newScene = load("res://Scenes/ExtraTime.tscn") #reference to the loaded resource
 		var newInstance = newScene.instantiate() #creates a new node
 		get_parent().add_child.call_deferred((newInstance))
-		newInstance.position = timePickupPositionNode.position
+		newInstance.position = timePickupPositionNodes.pick_random().position
 		
 	if types[0]=='Speed Up':
 		print("instantiating speed up now")
 		var newScene = load("res://Scenes/SpeedUp.tscn") #reference to the loaded resource
 		var newInstance = newScene.instantiate() #creates a new node
 		get_parent().add_child.call_deferred((newInstance))
-		newInstance.position = speedPickupPositionNode.position
+		newInstance.position = speedPickupPositionNodes.pick_random().position
 
 
 func _on_new_powerup_timer_timeout() -> void:

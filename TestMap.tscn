@@ -149,16 +149,22 @@ wait_time = 60.0
 one_shot = true
 autostart = true
 
-[node name="PowerupSpawner" type="Node2D" parent="." node_paths=PackedStringArray("timePickupPositionNode", "speedPickupPositionNode")]
+[node name="PowerupSpawner" type="Node2D" parent="." node_paths=PackedStringArray("timePickupPositionNodes", "speedPickupPositionNodes")]
 script = ExtResource("10_cw3un")
-timePickupPositionNode = NodePath("TimePickupPosition")
-speedPickupPositionNode = NodePath("SpeedPickupPosition")
+timePickupPositionNodes = [NodePath("TimePickupPosition"), NodePath("TimePickupPosition2")]
+speedPickupPositionNodes = [NodePath("SpeedPickupPosition"), NodePath("SpeedPickupPosition2")]
 
 [node name="TimePickupPosition" type="Node2D" parent="PowerupSpawner"]
 position = Vector2(-223, 71)
 
+[node name="TimePickupPosition2" type="Node2D" parent="PowerupSpawner"]
+position = Vector2(43, -117)
+
 [node name="SpeedPickupPosition" type="Node2D" parent="PowerupSpawner"]
 position = Vector2(143, -128)
+
+[node name="SpeedPickupPosition2" type="Node2D" parent="PowerupSpawner"]
+position = Vector2(-119, -93)
 
 [node name="newPowerupTimer" type="Timer" parent="PowerupSpawner"]
 wait_time = 10.0
