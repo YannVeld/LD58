@@ -1,13 +1,11 @@
 extends CharacterBody2D
 
-const ENGINE_POWER = 500
-const STEERING_ANGLE = 15
-const BONUS_ENGINE_POWER = 350
-const BONUS_STEERING_ANGLE = 5
-
+@export_group("Base settings")
 @export var wheel_base = 15
-@export var steering_angle = STEERING_ANGLE
-@export var engine_power = ENGINE_POWER
+@export var base_steering_angle = 15
+@export var tight_steering_angle_bonus = 10
+@export var key_holdtime_tight_steering = 2
+@export var base_engine_power = 500
 @export var braking = -450
 @export var max_speed_reverse = 250
 @export var min_speed = 25
@@ -17,16 +15,10 @@ const BONUS_STEERING_ANGLE = 5
 @export var traction_slow = 0.7
 @export var on_collision_backward_velocity = 35
 
-@onready var stun_timer: Timer = $stunTimer
-@onready var mainCamera = $"../../Camera2D" #Ugly!
-
-@onready var game_manager: Node = $"../../Game manager"
-
-@onready var speedBoostParticleEmitter: GPUParticles2D = $"../../Game manager/SpeedPickupParticles"
-@onready var timeBoostParticleEmitter: GPUParticles2D = $"../../Game manager/TimePickupParticles"
-@onready var carFireParticleEmitter: GPUParticles2D = $"../FireParticleEmitter"
-
+@export_group("Boost settings")
 @export var speedBoostTime: float = 5
+@export var bonus_engine_power = 350
+@export var bonus_steering_angle = 5
 
 @export_group("VFX")
 @export var collisionShakeDuration: float = 0.2
@@ -34,6 +26,14 @@ const BONUS_STEERING_ANGLE = 5
 @export var fireParticleSpeed: float = 100
 @export var boostPickupShakeDuration: float = 0.2
 @export var boostPickupShakeMagnitude: float = 3.0
+
+
+@onready var stun_timer: Timer = $stunTimer
+@onready var mainCamera = $"../../Camera2D" #Ugly!
+@onready var game_manager: Node = $"../../Game manager"
+@onready var speedBoostParticleEmitter: GPUParticles2D = $"../../Game manager/SpeedPickupParticles"
+@onready var timeBoostParticleEmitter: GPUParticles2D = $"../../Game manager/TimePickupParticles"
+@onready var carFireParticleEmitter: GPUParticles2D = $"../FireParticleEmitter"
 
 var friction = -55/110.0 * 3
 var drag = -0.06
@@ -43,12 +43,42 @@ var steer_direction
 
 var stunned = false
 
-func get_input():
+var speedupTimer: Timer
+
+# To detect key releases
+var _timeSinceSteerPress = 0
+var _steer_input = 0
+
+# Changeable car parameters
+@onready var _current_engine_power = base_engine_power
+
+
+
+func get_input(delta: float):
 	var turn = Input.get_axis("steer_left", "steer_right")
-	steer_direction = turn * deg_to_rad(steering_angle)
+	if (sign(turn) == sign(_steer_input)) and (abs(turn) > 0.1):
+		_timeSinceSteerPress += delta
+	else:
+		_timeSinceSteerPress = 0
+	_steer_input = turn
+	
+func _calculate_steering_angle() -> float:
+	var _frac = _timeSinceSteerPress / key_holdtime_tight_steering
+	_frac = clampf(_frac, 0, 1)
+	var _angle = lerpf(base_steering_angle, base_steering_angle+tight_steering_angle_bonus, _frac)
+		
+	if speedupTimer and speedupTimer.time_left > 0:
+		_angle += bonus_steering_angle
+	
+	return _angle
+	
+func do_steering():
+	var _steering_angle = _calculate_steering_angle()
+	steer_direction = _steer_input * deg_to_rad(_steering_angle)
 	#print(steer_direction)
+	
 	if Input.is_action_pressed("accelerate"):
-		acceleration = transform.x * engine_power
+		acceleration = transform.x * _current_engine_power
 	if Input.is_action_pressed("brake"):
 		acceleration = transform.x * braking
 		
@@ -81,16 +111,17 @@ func calculate_steering(delta):
 		velocity = -new_heading * min(velocity.length(), max_speed_reverse)
 
 func _physics_process(delta: float) -> void:
-		acceleration = Vector2.ZERO
-		if not stunned:
-			get_input()
-		apply_friction(delta)
-		#print(acceleration)
-		velocity += acceleration * delta
-		if velocity.length()>0:
-			calculate_steering(delta)
-		move_and_slide()
-		#print("velocity = ", velocity.length() )
+	acceleration = Vector2.ZERO
+	if not stunned:
+		get_input(delta)
+		do_steering()
+	apply_friction(delta)
+	#print(acceleration)
+	velocity += acceleration * delta
+	if velocity.length()>0:
+		calculate_steering(delta)
+	move_and_slide()
+	#print("velocity = ", velocity.length() )
 
 func handle_collision():
 	velocity = -on_collision_backward_velocity*velocity.normalized()
@@ -119,9 +150,8 @@ func pickup(type: String, pickup: Node2D):
 		
 	elif type=='Speed Up':
 		print("Speed up activated")
-		engine_power = ENGINE_POWER + BONUS_ENGINE_POWER
-		steering_angle = STEERING_ANGLE + BONUS_STEERING_ANGLE
-		var speedupTimer = Timer.new()
+		_current_engine_power = base_engine_power + bonus_engine_power
+		speedupTimer = Timer.new()
 		add_child(speedupTimer)
 		speedupTimer.wait_time = speedBoostTime
 		speedupTimer.one_shot= true
@@ -138,13 +168,12 @@ func pickup(type: String, pickup: Node2D):
 
 func _on_timer_timeout() -> void:
 	print("Speed up deactivated")
-	engine_power = ENGINE_POWER
-	steering_angle = STEERING_ANGLE
+	_current_engine_power = base_engine_power
 	# How to delete speedupTimer?
 
 
 func _handle_fire_particle_emission() -> void:
-	if engine_power <= ENGINE_POWER:
+	if _current_engine_power <= base_engine_power:
 		carFireParticleEmitter.set_emitting(false)
 		return
 	if velocity.length() <= fireParticleSpeed:
