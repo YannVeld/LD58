@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://c42dpnccxkfab"]
+[gd_scene load_steps=33 format=4 uid="uid://c42dpnccxkfab"]
 
 [ext_resource type="Texture2D" uid="uid://cu26ucumncc1l" path="res://Sprites/Speedometer.png" id="1_57nyl"]
 [ext_resource type="Texture2D" uid="uid://dy8rgc3tipp2n" path="res://Sprites/GroundTile.png" id="1_pkdq6"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://ddm6vp0cbx0f4" path="res://Scenes/Mailbox.tscn" id="18_xtcp7"]
 [ext_resource type="PackedScene" uid="uid://cr8ljerwlh3mh" path="res://Scenes/Car.tscn" id="19_ek034"]
 [ext_resource type="Script" uid="uid://nx6bt0oiyarw" path="res://Scripts/stunzone.gd" id="20_02i7e"]
+[ext_resource type="PackedScene" uid="uid://blbg660ijgbq1" path="res://Scenes/Tree.tscn" id="22_qrjo1"]
 
 [sub_resource type="Curve" id="Curve_upqcn"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5888889, 1), 0.0, 0.0, 0, 0, Vector2(0.9944445, 0), 0.0, 0.0, 0, 0]
@@ -166,10 +167,10 @@ timePickupPositionNodes = [NodePath("TimePickupPosition"), NodePath("TimePickupP
 speedPickupPositionNodes = [NodePath("SpeedPickupPosition"), NodePath("SpeedPickupPosition2")]
 
 [node name="TimePickupPosition" type="Node2D" parent="PowerupSpawner"]
-position = Vector2(-221, -94)
+position = Vector2(-226, -92)
 
 [node name="TimePickupPosition2" type="Node2D" parent="PowerupSpawner"]
-position = Vector2(178, 83)
+position = Vector2(218, 65)
 
 [node name="SpeedPickupPosition" type="Node2D" parent="PowerupSpawner"]
 position = Vector2(-226, 68)
@@ -425,7 +426,7 @@ shape = SubResource("RectangleShape2D_1y0um")
 
 [node name="Car" parent="." instance=ExtResource("19_ek034")]
 unique_name_in_owner = true
-position = Vector2(43, 101)
+position = Vector2(-111, -92)
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("20_02i7e")
@@ -445,6 +446,32 @@ shape = SubResource("WorldBoundaryShape2D_upqcn")
 [node name="WorldBoundary_right" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(10, 0)
 shape = SubResource("WorldBoundaryShape2D_cw3un")
+
+[node name="Trees" type="Node2D" parent="."]
+
+[node name="Tree" parent="Trees" instance=ExtResource("22_qrjo1")]
+position = Vector2(-170, -82)
+
+[node name="Tree2" parent="Trees" instance=ExtResource("22_qrjo1")]
+position = Vector2(168, -165)
+
+[node name="Tree3" parent="Trees" instance=ExtResource("22_qrjo1")]
+position = Vector2(147, -184)
+
+[node name="Tree4" parent="Trees" instance=ExtResource("22_qrjo1")]
+position = Vector2(111, -14)
+
+[node name="Tree5" parent="Trees" instance=ExtResource("22_qrjo1")]
+position = Vector2(67, 20)
+
+[node name="Tree6" parent="Trees" instance=ExtResource("22_qrjo1")]
+position = Vector2(279, 67)
+
+[node name="Tree9" parent="Trees" instance=ExtResource("22_qrjo1")]
+position = Vector2(169, 131)
+
+[node name="Tree11" parent="Trees" instance=ExtResource("22_qrjo1")]
+position = Vector2(-118, 116)
 
 [connection signal="timeout" from="Game manager/newCollectionTimer" to="Game manager" method="_on_new_collection_timer_timeout"]
 [connection signal="timeout" from="Game manager/gameTimer" to="Game manager" method="_on_game_timer_timeout"]

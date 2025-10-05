@@ -58,11 +58,11 @@ func _on_new_collection_timer_timeout() -> void:
 	
 func score_collection(timeLeft):
 	if timeLeft>scoreThreshold:
-		score += 10
+		score += 2
 	else:
-		score += 5
+		score += 1
 	pickup_effect()
-	print("score = ", score )
+	#print("score = ", score )
 
 func _on_game_timer_timeout() -> void:
 	game_over()
@@ -72,7 +72,7 @@ func add_time():
 	
 func game_over():
 	Global.score = score
-	print("Game over! Your score is ", score)
+	#print("Game over! Your score is ", score)
 	get_tree().change_scene_to_file("res://GameOverScreen.tscn")
 
 func pickup_effect():
