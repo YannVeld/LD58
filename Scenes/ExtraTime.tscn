@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bh3ranxljax74"]
 
-[ext_resource type="Script" uid="uid://bws5fp52dcfq7" path="res://Scripts/extra_time.gd" id="1_apmon"]
+[ext_resource type="Script" uid="uid://3hn8vsojtv8" path="res://Scripts/pickupable.gd" id="1_h0xvu"]
 [ext_resource type="PackedScene" uid="uid://d3e3e26o28k7h" path="res://Scenes/Pickup.tscn" id="2_apmon"]
 [ext_resource type="Texture2D" uid="uid://dpca67i4cac4b" path="res://Sprites/Powerup_time.png" id="2_h0xvu"]
 [ext_resource type="Texture2D" uid="uid://c0oij7uwp4pnf" path="res://Sprites/PickupParticle_yellow.png" id="3_xgx6e"]
@@ -32,8 +32,8 @@ damping_max = 20.0
 scale_curve = SubResource("CurveTexture_tjev1")
 
 [node name="ExtraTime" type="Node2D"]
-position = Vector2(-224, 72)
-script = ExtResource("1_apmon")
+script = ExtResource("1_h0xvu")
+dontDespawnDistance = 64.0
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 texture = ExtResource("2_h0xvu")

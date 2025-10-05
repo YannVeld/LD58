@@ -12,6 +12,10 @@ func activate_powerup():
 	var types = ['Extra Time', 'Speed Up']
 	types.shuffle()
 	if types[0]=='Extra Time':
+		if get_node_or_null("../ExtraTime"):
+			print("Time already exists!")
+			return
+		
 		print("instantiating extra time now")
 		var newScene = load("res://Scenes/ExtraTime.tscn") #reference to the loaded resource
 		var newInstance = newScene.instantiate() #creates a new node
@@ -19,6 +23,10 @@ func activate_powerup():
 		newInstance.position = timePickupPositionNodes.pick_random().position
 		
 	if types[0]=='Speed Up':
+		if get_node_or_null("../SpeedUp"):
+			print("SpeedUp already exists!")
+			return
+		
 		print("instantiating speed up now")
 		var newScene = load("res://Scenes/SpeedUp.tscn") #reference to the loaded resource
 		var newInstance = newScene.instantiate() #creates a new node
