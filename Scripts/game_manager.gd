@@ -16,7 +16,10 @@ extends Node
 @onready var new_powerup_timer: Timer = $newPowerupTimer
 
 @onready var car = %"Car"
+@onready var carBody = car.get_node("CharacterBody2D")
 @onready var letterEffectScene = preload("res://Scenes/gain_letter_effect.tscn")
+
+@export var minimalDistToCarForMailboxActivation: float = 0.0
 
 
 func _process(float) -> void:
@@ -29,7 +32,21 @@ func _ready():
 		
 func activate_mailbox():
 	if len(inactive_mailboxes)>0:
-		var idx = inactive_mailboxes.pick_random()
+		var idx
+		var _distToCar = 0.0
+		var _iter = 0
+		
+		# Find a postbox that is far enough away from car
+		while _distToCar < minimalDistToCarForMailboxActivation:
+			idx = inactive_mailboxes.pick_random()
+			var _boxPos = mailboxes.get_child(idx).global_position
+			_distToCar = _boxPos.distance_to(carBody.global_position)
+			
+			_iter += 1
+			if _iter > 100:
+				print("WARNING: Could not find a postbox that is far away from car!")
+				break
+		
 		inactive_mailboxes.erase(idx)
 		active_mailboxes.append(idx)
 		
