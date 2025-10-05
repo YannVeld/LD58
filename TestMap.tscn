@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://bv4e4ssw5lhku"]
+[gd_scene load_steps=25 format=4 uid="uid://bv4e4ssw5lhku"]
 
 [ext_resource type="FontFile" uid="uid://cn4n80ikqjwnu" path="res://Fonts/m6x11.ttf" id="1_43vq4"]
 [ext_resource type="PackedScene" uid="uid://cr8ljerwlh3mh" path="res://Scenes/Car.tscn" id="1_jlwbg"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://ddm6vp0cbx0f4" path="res://Scenes/Mailbox.tscn" id="3_xxdj2"]
 [ext_resource type="Texture2D" uid="uid://codft0po2y0u8" path="res://Sprites/GrassPuff2.png" id="4_43vq4"]
 [ext_resource type="Texture2D" uid="uid://bnbghtksp1ndq" path="res://Sprites/GrassPuff3.png" id="5_d4kuo"]
+[ext_resource type="Script" uid="uid://nx6bt0oiyarw" path="res://Scripts/stunzone.gd" id="17_wvj8d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ix1e5"]
 texture = ExtResource("2_lulwx")
@@ -40,6 +41,21 @@ tile_proxies/coords_level = [[0, Vector2i(0, 0)], [11, Vector2i(0, 0)], [1, Vect
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1y0um"]
 size = Vector2(20, 62)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0eg8n"]
+distance = -181.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wvj8d"]
+normal = Vector2(0, 1)
+distance = -181.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_upqcn"]
+normal = Vector2(1, 0)
+distance = -319.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cw3un"]
+normal = Vector2(-1, 0)
+distance = -321.0
 
 [node name="TestMap" type="Node2D"]
 
@@ -224,6 +240,22 @@ shape = SubResource("RectangleShape2D_1y0um")
 unique_name_in_owner = true
 position = Vector2(-9, -93)
 
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("17_wvj8d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("WorldBoundaryShape2D_0eg8n")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("WorldBoundaryShape2D_wvj8d")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("WorldBoundaryShape2D_upqcn")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("WorldBoundaryShape2D_cw3un")
+
 [connection signal="timeout" from="Game manager/newCollectionTimer" to="Game manager" method="_on_new_collection_timer_timeout"]
 [connection signal="timeout" from="Game manager/gameTimer" to="Game manager" method="_on_game_timer_timeout"]
 [connection signal="timeout" from="Game manager/newPowerupTimer" to="Game manager" method="_on_new_powerup_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
