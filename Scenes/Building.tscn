@@ -13,20 +13,22 @@
 [ext_resource type="Texture2D" uid="uid://dlckyo71odncj" path="res://Sprites/HouseParts/House_windowRoof.png" id="10_nvbf8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_33ows"]
-size = Vector2(31.507708, 30.398249)
+size = Vector2(27.430506, 27.53545)
 
 [node name="Area2D" type="Area2D" groups=["Buildings"]]
 script = ExtResource("1_1q4et")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 18)
 texture = ExtResource("2_1q4et")
+offset = Vector2(0, -18)
 script = ExtResource("3_63bso")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.74840903, 16.702276)
-rotation = 0.43943542
-scale = Vector2(0.9999997, 0.9999997)
-skew = 0.652753
+position = Vector2(1.1914545, 17.175503)
+rotation = 0.43943545
+scale = Vector2(0.99999964, 0.9999997)
+skew = 0.65275276
 shape = SubResource("RectangleShape2D_33ows")
 
 [node name="Decorations" type="Node2D" parent="."]
@@ -35,33 +37,47 @@ roofExtensionChance = 0.33
 roofWindowChance = 0.33
 
 [node name="Chimney" type="Sprite2D" parent="Decorations"]
+position = Vector2(0, 18)
 texture = ExtResource("4_63bso")
+offset = Vector2(0, -18)
 script = ExtResource("3_63bso")
 
 [node name="Flowerbox" type="Sprite2D" parent="Decorations"]
+position = Vector2(0, 18)
 texture = ExtResource("5_0yywl")
+offset = Vector2(0, -18)
 script = ExtResource("3_63bso")
 
 [node name="RoofExtension" type="Sprite2D" parent="Decorations"]
 visible = false
+position = Vector2(0, 18)
 texture = ExtResource("6_aavm2")
+offset = Vector2(0, -18)
 script = ExtResource("3_63bso")
 
 [node name="RoofWindow" type="Sprite2D" parent="Decorations"]
 visible = false
+position = Vector2(0, 18)
 texture = ExtResource("7_k2asx")
+offset = Vector2(0, -18)
 script = ExtResource("3_63bso")
 
 [node name="Window" type="Sprite2D" parent="Decorations"]
+position = Vector2(0, 18)
 texture = ExtResource("8_e0nrr")
+offset = Vector2(0, -18)
 script = ExtResource("3_63bso")
 
 [node name="WindowFlowers" type="Sprite2D" parent="Decorations"]
+position = Vector2(0, 18)
 texture = ExtResource("9_r1fij")
+offset = Vector2(0, -18)
 script = ExtResource("3_63bso")
 
 [node name="WindowRoof" type="Sprite2D" parent="Decorations"]
+position = Vector2(0, 18)
 texture = ExtResource("10_nvbf8")
+offset = Vector2(0, -18)
 script = ExtResource("3_63bso")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

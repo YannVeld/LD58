@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cr8ljerwlh3mh"]
+[gd_scene load_steps=16 format=3 uid="uid://cr8ljerwlh3mh"]
 
 [ext_resource type="Script" uid="uid://ylfclj4c2uk7" path="res://Scripts/car.gd" id="1_8tfcp"]
 [ext_resource type="PackedScene" uid="uid://cjjrpk3rxk1m1" path="res://Scenes/sprite_stack.tscn" id="3_7iea3"]
@@ -11,10 +11,15 @@
 [ext_resource type="Texture2D" uid="uid://m435802lnel3" path="res://Sprites/VoxelCar/06_VoxelCarSlices.png" id="10_uvy3y"]
 [ext_resource type="Texture2D" uid="uid://prb776xlxhlf" path="res://Sprites/VoxelCar/07_VoxelCarSlices.png" id="11_k8vma"]
 [ext_resource type="Texture2D" uid="uid://6m48r8oaslvr" path="res://Sprites/VoxelCar/08_VoxelCarSlices.png" id="12_pkjdc"]
+[ext_resource type="Script" uid="uid://caqe224v5cr1r" path="res://Scripts/tire_track.gd" id="13_e1atf"]
 [ext_resource type="Texture2D" uid="uid://bpl7bud82nx0y" path="res://Sprites/VoxelCar/09_VoxelCarSlices.png" id="13_y0bmx"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1atf"]
-size = Vector2(16, 6)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ci6hu"]
+radius = 3.0
+
+[sub_resource type="Gradient" id="Gradient_e1atf"]
+offsets = PackedFloat32Array(0, 0.49029127, 1)
+colors = PackedColorArray(0.09803922, 0.23921569, 0.24705882, 1, 0.09803922, 0.23921569, 0.24705882, 1, 0.09803922, 0.23921569, 0.24705882, 0)
 
 [node name="Car" type="Node2D"]
 
@@ -24,7 +29,6 @@ shakeDuration = 0.2
 shakeMagintude = 3.0
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-visible = false
 rotation = 1.5707964
 texture = ExtResource("10_uvy3y")
 
@@ -36,10 +40,28 @@ reverseOrder = true
 layerCopies = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("RectangleShape2D_e1atf")
+shape = SubResource("CircleShape2D_ci6hu")
 
 [node name="stunTimer" type="Timer" parent="CharacterBody2D"]
 wait_time = 0.5
 one_shot = true
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 1.0
+default_color = Color(0.09803922, 0.23921569, 0.24705882, 1)
+gradient = SubResource("Gradient_e1atf")
+script = ExtResource("13_e1atf")
+pieceLength = 8.0
+pieceCount = 50
+piecesOffset = Vector2(0, 2)
+
+[node name="Line2D2" type="Line2D" parent="."]
+width = 1.0
+default_color = Color(0.09803922, 0.23921569, 0.24705882, 1)
+gradient = SubResource("Gradient_e1atf")
+script = ExtResource("13_e1atf")
+pieceLength = 8.0
+pieceCount = 50
+piecesOffset = Vector2(0, -2)
 
 [connection signal="timeout" from="CharacterBody2D/stunTimer" to="CharacterBody2D" method="_on_stun_timer_timeout"]
