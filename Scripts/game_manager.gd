@@ -15,7 +15,6 @@ extends Node
 
 @onready var new_powerup_timer: Timer = $newPowerupTimer
 
-
 func _process(float) -> void:
 	scoreLabel.text = str(score)
 	game_time.text = str(int(gameTimer.time_left))
@@ -53,11 +52,16 @@ func add_time():
 	gameTimer.start(gameTimer.time_left + 5.0)
 	
 func activate_powerup():
-	var types = ['Extra Time']
+	var types = ['Extra Time', 'Speed Up']
 	types.shuffle()
 	if types[0]=='Extra Time':
 		print("instantiating extra time now")
 		var newScene = load("res://Scenes/ExtraTime.tscn") #reference to the loaded resource
+		var newInstance = newScene.instantiate() #creates a new node
+		get_parent().add_child.call_deferred((newInstance))
+	if types[0]=='Speed Up':
+		print("instantiating speed up now")
+		var newScene = load("res://Scenes/SpeedUp.tscn") #reference to the loaded resource
 		var newInstance = newScene.instantiate() #creates a new node
 		get_parent().add_child.call_deferred((newInstance))
 	
@@ -65,7 +69,6 @@ func game_over():
 	Global.score = score
 	print("Game over! Your score is ", score)
 	get_tree().change_scene_to_file("res://GameOverScreen.tscn")
-
 
 func _on_new_powerup_timer_timeout() -> void:
 	activate_powerup() # Replace with function body.

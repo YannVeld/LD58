@@ -1,8 +1,13 @@
 extends CharacterBody2D
 
+const ENGINE_POWER = 500
+const STEERING_ANGLE = 15
+const BONUS_ENGINE_POWER = 350
+const BONUS_STEERING_ANGLE = 5
+
 @export var wheel_base = 15
-@export var steering_angle = 20
-@export var engine_power = 500
+@export var steering_angle = STEERING_ANGLE
+@export var engine_power = ENGINE_POWER
 @export var braking = -450
 @export var max_speed_reverse = 250
 @export var min_speed = 25
@@ -99,3 +104,21 @@ func pickup(type):
 	if type=='Extra Time':
 		print('extra time' )
 		game_manager.add_time()
+	elif type=='Speed Up':
+		print("Speed up activated")
+		engine_power = ENGINE_POWER + BONUS_ENGINE_POWER
+		steering_angle = STEERING_ANGLE + BONUS_STEERING_ANGLE
+		var speedupTimer = Timer.new()
+		add_child(speedupTimer)
+		speedupTimer.wait_time = 5
+		speedupTimer.one_shot= true
+		speedupTimer.start()
+		speedupTimer.timeout.connect(_on_timer_timeout)
+	else:
+		print("Something is wrong with the powerup")
+
+func _on_timer_timeout() -> void:
+	print("Speed up deactivated")
+	engine_power = ENGINE_POWER
+	steering_angle = STEERING_ANGLE
+	# How to delete speedupTimer?

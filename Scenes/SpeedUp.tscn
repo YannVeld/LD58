@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cn8km7hdjnxyf"]
+
+[ext_resource type="Script" uid="uid://3hn8vsojtv8" path="res://Scripts/speed_up.gd" id="1_2nesi"]
+[ext_resource type="Texture2D" uid="uid://euk13n5vuy58" path="res://Sprites/redSquare.png" id="1_s8pff"]
+[ext_resource type="PackedScene" uid="uid://d3e3e26o28k7h" path="res://Scenes/Pickup.tscn" id="3_0mhh1"]
+
+[node name="SpeedUp" type="Node2D"]
+position = Vector2(-110, -94)
+script = ExtResource("1_2nesi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_s8pff")
+
+[node name="Pickup" parent="." instance=ExtResource("3_0mhh1")]
+type = "Speed Up"
+
+[node name="CountdownTimer" type="Timer" parent="."]
+wait_time = 7.0
+autostart = true
+
+[connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]
+[connection signal="timeout" from="CountdownTimer" to="." method="_on_countdown_timer_timeout"]
