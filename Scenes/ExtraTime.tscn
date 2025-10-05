@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d3e3e26o28k7h" path="res://Scenes/Pickup.tscn" id="2_apmon"]
 
 [node name="ExtraTime" type="Node2D"]
+position = Vector2(-224, 72)
 script = ExtResource("1_apmon")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -13,4 +14,9 @@ texture = ExtResource("1_dqeyy")
 
 [node name="Pickup" parent="." instance=ExtResource("2_apmon")]
 
+[node name="CountdownTimer" type="Timer" parent="."]
+wait_time = 7.0
+autostart = true
+
 [connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]
+[connection signal="timeout" from="CountdownTimer" to="." method="_on_countdown_timer_timeout"]

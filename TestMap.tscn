@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bv4e4ssw5lhku"]
+[gd_scene load_steps=20 format=4 uid="uid://bv4e4ssw5lhku"]
 
 [ext_resource type="FontFile" uid="uid://cn4n80ikqjwnu" path="res://Fonts/m6x11.ttf" id="1_43vq4"]
 [ext_resource type="PackedScene" uid="uid://cr8ljerwlh3mh" path="res://Scenes/Car.tscn" id="1_jlwbg"]
@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://ddm6vp0cbx0f4" path="res://Scenes/Mailbox.tscn" id="3_xxdj2"]
 [ext_resource type="Texture2D" uid="uid://codft0po2y0u8" path="res://Sprites/GrassPuff2.png" id="4_43vq4"]
 [ext_resource type="Texture2D" uid="uid://bnbghtksp1ndq" path="res://Sprites/GrassPuff3.png" id="5_d4kuo"]
-[ext_resource type="PackedScene" uid="uid://bh3ranxljax74" path="res://Scenes/ExtraTime.tscn" id="12_4l0jn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ix1e5"]
 texture = ExtResource("2_lulwx")
@@ -101,6 +100,10 @@ autostart = true
 [node name="gameTimer" type="Timer" parent="Game manager"]
 wait_time = 60.0
 one_shot = true
+autostart = true
+
+[node name="newPowerupTimer" type="Timer" parent="Game manager"]
+wait_time = 10.0
 autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -221,9 +224,6 @@ shape = SubResource("RectangleShape2D_1y0um")
 unique_name_in_owner = true
 position = Vector2(-9, -93)
 
-[node name="ExtraTime" parent="." instance=ExtResource("12_4l0jn")]
-position = Vector2(65, -130)
-scale = Vector2(1.5, 1.5)
-
 [connection signal="timeout" from="Game manager/newCollectionTimer" to="Game manager" method="_on_new_collection_timer_timeout"]
 [connection signal="timeout" from="Game manager/gameTimer" to="Game manager" method="_on_game_timer_timeout"]
+[connection signal="timeout" from="Game manager/newPowerupTimer" to="Game manager" method="_on_new_powerup_timer_timeout"]
