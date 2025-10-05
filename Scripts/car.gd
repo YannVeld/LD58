@@ -27,6 +27,7 @@ const BONUS_STEERING_ANGLE = 5
 @onready var game_manager: Node = $"../../Game manager"
 
 @onready var speedBoostParticleEmitter: GPUParticles2D = $"../../Game manager/SpeedPickupParticles"
+@onready var timeBoostParticleEmitter: GPUParticles2D = $"../../Game manager/TimePickupParticles"
 
 var friction = -55/110.0 * 3
 var drag = -0.06
@@ -106,6 +107,10 @@ func pickup(type: String, pickup: Node2D):
 	if type=='Extra Time':
 		print('extra time' )
 		game_manager.add_time()
+		
+		timeBoostParticleEmitter.global_position = pickup.get_parent().global_position
+		timeBoostParticleEmitter.restart()
+		
 	elif type=='Speed Up':
 		print("Speed up activated")
 		engine_power = ENGINE_POWER + BONUS_ENGINE_POWER

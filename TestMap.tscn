@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://bv4e4ssw5lhku"]
+[gd_scene load_steps=30 format=4 uid="uid://bv4e4ssw5lhku"]
 
 [ext_resource type="FontFile" uid="uid://cn4n80ikqjwnu" path="res://Fonts/m6x11.ttf" id="1_43vq4"]
 [ext_resource type="PackedScene" uid="uid://cr8ljerwlh3mh" path="res://Scenes/Car.tscn" id="1_jlwbg"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://ddm6vp0cbx0f4" path="res://Scenes/Mailbox.tscn" id="3_xxdj2"]
 [ext_resource type="Texture2D" uid="uid://codft0po2y0u8" path="res://Sprites/GrassPuff2.png" id="4_43vq4"]
 [ext_resource type="Texture2D" uid="uid://bnbghtksp1ndq" path="res://Sprites/GrassPuff3.png" id="5_d4kuo"]
+[ext_resource type="Texture2D" uid="uid://c0oij7uwp4pnf" path="res://Sprites/PickupParticle_yellow.png" id="9_upqcn"]
 [ext_resource type="Script" uid="uid://nx6bt0oiyarw" path="res://Scripts/stunzone.gd" id="17_wvj8d"]
 [ext_resource type="Texture2D" uid="uid://btcnpmb0axnld" path="res://Sprites/PickupParticle.png" id="18_0eg8n"]
 
@@ -157,6 +158,17 @@ emitting = false
 amount = 50
 amount_ratio = 0.8
 texture = ExtResource("18_0eg8n")
+one_shot = true
+explosiveness = 0.9
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_cw3un")
+
+[node name="TimePickupParticles" type="GPUParticles2D" parent="Game manager"]
+z_index = -5
+emitting = false
+amount = 50
+amount_ratio = 0.8
+texture = ExtResource("9_upqcn")
 one_shot = true
 explosiveness = 0.9
 randomness = 0.5
