@@ -20,14 +20,20 @@ const BONUS_STEERING_ANGLE = 5
 @onready var stun_timer: Timer = $stunTimer
 @onready var mainCamera = $"../../Camera2D" #Ugly!
 
-@export_group("Screen shake")
-@export var shakeDuration: float = 0.5
-@export var shakeMagintude: float = 5
-
 @onready var game_manager: Node = $"../../Game manager"
 
 @onready var speedBoostParticleEmitter: GPUParticles2D = $"../../Game manager/SpeedPickupParticles"
 @onready var timeBoostParticleEmitter: GPUParticles2D = $"../../Game manager/TimePickupParticles"
+@onready var carFireParticleEmitter: GPUParticles2D = $"../FireParticleEmitter"
+
+@export var speedBoostTime: float = 5
+
+@export_group("VFX")
+@export var collisionShakeDuration: float = 0.2
+@export var collisionShakeMagnitude: float = 3.0
+@export var fireParticleSpeed: float = 100
+@export var boostPickupShakeDuration: float = 0.2
+@export var boostPickupShakeMagnitude: float = 3.0
 
 var friction = -55/110.0 * 3
 var drag = -0.06
@@ -93,7 +99,7 @@ func handle_collision():
 	stunned = true
 	stun_timer.start()
 	
-	mainCamera.shake(shakeDuration, shakeMagintude)
+	mainCamera.shake(collisionShakeDuration, collisionShakeDuration)
 	
 func handle_mail_pickup():
 	print("mail received")
@@ -117,13 +123,15 @@ func pickup(type: String, pickup: Node2D):
 		steering_angle = STEERING_ANGLE + BONUS_STEERING_ANGLE
 		var speedupTimer = Timer.new()
 		add_child(speedupTimer)
-		speedupTimer.wait_time = 5
+		speedupTimer.wait_time = speedBoostTime
 		speedupTimer.one_shot= true
 		speedupTimer.start()
 		speedupTimer.timeout.connect(_on_timer_timeout)
 		
 		speedBoostParticleEmitter.global_position = pickup.get_parent().global_position
 		speedBoostParticleEmitter.restart()
+		
+		mainCamera.shake(boostPickupShakeDuration, boostPickupShakeMagnitude)
 		
 	else:
 		print("Something is wrong with the powerup")
@@ -133,3 +141,19 @@ func _on_timer_timeout() -> void:
 	engine_power = ENGINE_POWER
 	steering_angle = STEERING_ANGLE
 	# How to delete speedupTimer?
+
+
+func _handle_fire_particle_emission() -> void:
+	if engine_power <= ENGINE_POWER:
+		carFireParticleEmitter.set_emitting(false)
+		return
+	if velocity.length() <= fireParticleSpeed:
+		carFireParticleEmitter.set_emitting(false)
+		return
+	
+	carFireParticleEmitter.set_emitting(true)
+
+
+
+func _process(delta: float) -> void:
+	_handle_fire_particle_emission()

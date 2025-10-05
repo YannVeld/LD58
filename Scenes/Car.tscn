@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cr8ljerwlh3mh"]
+[gd_scene load_steps=21 format=3 uid="uid://cr8ljerwlh3mh"]
 
 [ext_resource type="Script" uid="uid://ylfclj4c2uk7" path="res://Scripts/car.gd" id="1_8tfcp"]
 [ext_resource type="PackedScene" uid="uid://cjjrpk3rxk1m1" path="res://Scenes/sprite_stack.tscn" id="3_7iea3"]
@@ -11,8 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://m435802lnel3" path="res://Sprites/VoxelCar/06_VoxelCarSlices.png" id="10_uvy3y"]
 [ext_resource type="Texture2D" uid="uid://prb776xlxhlf" path="res://Sprites/VoxelCar/07_VoxelCarSlices.png" id="11_k8vma"]
 [ext_resource type="Texture2D" uid="uid://6m48r8oaslvr" path="res://Sprites/VoxelCar/08_VoxelCarSlices.png" id="12_pkjdc"]
+[ext_resource type="Texture2D" uid="uid://de5o4yqc28f52" path="res://Sprites/FieryParticle.png" id="13_cewjx"]
 [ext_resource type="Script" uid="uid://caqe224v5cr1r" path="res://Scripts/tire_track.gd" id="13_e1atf"]
 [ext_resource type="Texture2D" uid="uid://bpl7bud82nx0y" path="res://Sprites/VoxelCar/09_VoxelCarSlices.png" id="13_y0bmx"]
+[ext_resource type="Script" uid="uid://dkgivps7mlqsl" path="res://Scripts/car_speedup_particles.gd" id="15_7iea3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ci6hu"]
 radius = 3.0
@@ -21,12 +23,39 @@ radius = 3.0
 offsets = PackedFloat32Array(0, 0.49029127, 1)
 colors = PackedColorArray(0.09803922, 0.23921569, 0.24705882, 1, 0.09803922, 0.23921569, 0.24705882, 1, 0.09803922, 0.23921569, 0.24705882, 0)
 
+[sub_resource type="Curve" id="Curve_7iea3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5888889, 1), 0.0, 0.0, 0, 0, Vector2(0.9944445, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tjev1"]
+curve = SubResource("Curve_7iea3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_56b3i"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(5, 5, 1)
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+spread = 180.0
+initial_velocity_min = 25.0
+initial_velocity_max = 30.0
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = -2.2351742e-05
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = -2.2351742e-06
+tangential_accel_min = -2.2351742e-06
+tangential_accel_max = -2.2351742e-06
+damping_min = 10.0
+damping_max = 60.000004
+scale_curve = SubResource("CurveTexture_tjev1")
+
 [node name="Car" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_8tfcp")
-shakeDuration = 0.2
-shakeMagintude = 3.0
+boostPickupShakeDuration = 2.0
+boostPickupShakeMagnitude = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 visible = false
@@ -64,5 +93,16 @@ script = ExtResource("13_e1atf")
 pieceLength = 8.0
 pieceCount = 50
 piecesOffset = Vector2(0, -2)
+
+[node name="FireParticleEmitter" type="GPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 60
+amount_ratio = 0.8
+texture = ExtResource("13_cewjx")
+preprocess = 1.0
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_56b3i")
+script = ExtResource("15_7iea3")
 
 [connection signal="timeout" from="CharacterBody2D/stunTimer" to="CharacterBody2D" method="_on_stun_timer_timeout"]
