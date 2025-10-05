@@ -426,7 +426,7 @@ shape = SubResource("RectangleShape2D_1y0um")
 
 [node name="Car" parent="." instance=ExtResource("19_ek034")]
 unique_name_in_owner = true
-position = Vector2(-111, -92)
+position = Vector2(12, -25)
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("20_02i7e")

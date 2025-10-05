@@ -12,8 +12,16 @@ func _ready() -> void:
 		var _pos = body.position
 		add_point(_pos)
 
+func _reset_track() -> void:
+	var _pos = body.position
+	for _n in range(pieceCount):
+		set_point_position(_n, _pos)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if Input.is_action_pressed("respawn"):
+		_reset_track()
+	
 	var _prevPiecePos = get_point_position(0)
 	var _carPos = body.position + piecesOffset.rotated(body.rotation)
 	var _dist = _prevPiecePos.distance_to(_carPos)

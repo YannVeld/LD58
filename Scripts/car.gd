@@ -43,6 +43,9 @@ extends CharacterBody2D
 @onready var spriteStack: Node2D = $SpriteStack
 @onready var spriteStackBaseAngle = spriteStack.get_rotation_degrees()
 
+@onready var spawnPosition = position
+@onready var spawnRotation = rotation
+
 var friction = -55/110.0 * 3
 var drag = -0.06
 
@@ -60,6 +63,13 @@ var _steer_input = 0
 # Changeable car parameters
 @onready var _current_engine_power = base_engine_power
 
+
+func _respawn():
+	if Input.is_action_pressed("respawn"):
+		acceleration = Vector2.ZERO
+		velocity = Vector2.ZERO
+		position = spawnPosition
+		rotation = spawnRotation
 
 
 func _get_input(delta: float):
@@ -138,6 +148,8 @@ func _do_fake_drifting() -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	_respawn()
+	
 	acceleration = Vector2.ZERO
 	if not stunned:
 		_get_input(delta)

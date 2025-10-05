@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dlckyo71odncj" path="res://Sprites/HouseParts/House_windowRoof.png" id="10_nvbf8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_33ows"]
-size = Vector2(27.430506, 27.53545)
+size = Vector2(31.362278, 30.417505)
 
 [node name="Building" type="Area2D" groups=["Buildings"]]
 script = ExtResource("1_1q4et")
@@ -25,7 +25,7 @@ offset = Vector2(0, -18)
 script = ExtResource("3_63bso")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.1914545, 17.175503)
+position = Vector2(0.6914532, 15.675503)
 rotation = 0.43943545
 scale = Vector2(0.99999964, 0.9999997)
 skew = 0.65275276

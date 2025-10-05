@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://bxr0l1jdwywuq" path="res://Sprites/DriftParticle.png" id="16_56b3i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ci6hu"]
-radius = 3.0
+radius = 4.0
 
 [sub_resource type="Gradient" id="Gradient_e1atf"]
 offsets = PackedFloat32Array(0, 0.49029127, 1)
@@ -55,10 +55,12 @@ scale_curve = SubResource("CurveTexture_tjev1")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 position = Vector2(1, -1)
+rotation = -2.5220008
 script = ExtResource("1_8tfcp")
 base_steering_angle = 20
 tight_steering_angle_bonus = 30
 key_holdtime_tight_steering = 3
+on_collision_backward_velocity = 55
 boostPickupShakeDuration = 2.0
 boostPickupShakeMagnitude = 2.0
 fakeDriftingAngle = 45.0
