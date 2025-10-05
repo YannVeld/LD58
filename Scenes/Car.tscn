@@ -53,6 +53,7 @@ scale_curve = SubResource("CurveTexture_tjev1")
 [node name="Car" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(1, -1)
 script = ExtResource("1_8tfcp")
 tight_steering_angle_bonus = 30
 key_holdtime_tight_steering = 3

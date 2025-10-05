@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://bv4e4ssw5lhku"]
+[gd_scene load_steps=31 format=4 uid="uid://bv4e4ssw5lhku"]
 
 [ext_resource type="FontFile" uid="uid://cn4n80ikqjwnu" path="res://Fonts/m6x11.ttf" id="1_43vq4"]
 [ext_resource type="PackedScene" uid="uid://cr8ljerwlh3mh" path="res://Scenes/Car.tscn" id="1_jlwbg"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://codft0po2y0u8" path="res://Sprites/GrassPuff2.png" id="4_43vq4"]
 [ext_resource type="Texture2D" uid="uid://bnbghtksp1ndq" path="res://Sprites/GrassPuff3.png" id="5_d4kuo"]
 [ext_resource type="Texture2D" uid="uid://c0oij7uwp4pnf" path="res://Sprites/PickupParticle_yellow.png" id="9_upqcn"]
+[ext_resource type="Script" uid="uid://bnlmexfwxaefa" path="res://Scripts/powerup_spawner.gd" id="10_cw3un"]
 [ext_resource type="Script" uid="uid://nx6bt0oiyarw" path="res://Scripts/stunzone.gd" id="17_wvj8d"]
 [ext_resource type="Texture2D" uid="uid://btcnpmb0axnld" path="res://Sprites/PickupParticle.png" id="18_0eg8n"]
 
@@ -148,11 +149,22 @@ wait_time = 60.0
 one_shot = true
 autostart = true
 
-[node name="newPowerupTimer" type="Timer" parent="Game manager"]
+[node name="PowerupSpawner" type="Node2D" parent="." node_paths=PackedStringArray("timePickupPositionNode", "speedPickupPositionNode")]
+script = ExtResource("10_cw3un")
+timePickupPositionNode = NodePath("TimePickupPosition")
+speedPickupPositionNode = NodePath("SpeedPickupPosition")
+
+[node name="TimePickupPosition" type="Node2D" parent="PowerupSpawner"]
+position = Vector2(-223, 71)
+
+[node name="SpeedPickupPosition" type="Node2D" parent="PowerupSpawner"]
+position = Vector2(143, -128)
+
+[node name="newPowerupTimer" type="Timer" parent="PowerupSpawner"]
 wait_time = 10.0
 autostart = true
 
-[node name="SpeedPickupParticles" type="GPUParticles2D" parent="Game manager"]
+[node name="SpeedPickupParticles" type="GPUParticles2D" parent="PowerupSpawner"]
 z_index = -5
 emitting = false
 amount = 50
@@ -163,7 +175,7 @@ explosiveness = 0.9
 randomness = 0.5
 process_material = SubResource("ParticleProcessMaterial_cw3un")
 
-[node name="TimePickupParticles" type="GPUParticles2D" parent="Game manager"]
+[node name="TimePickupParticles" type="GPUParticles2D" parent="PowerupSpawner"]
 z_index = -5
 emitting = false
 amount = 50
@@ -309,5 +321,5 @@ shape = SubResource("WorldBoundaryShape2D_cw3un")
 
 [connection signal="timeout" from="Game manager/newCollectionTimer" to="Game manager" method="_on_new_collection_timer_timeout"]
 [connection signal="timeout" from="Game manager/gameTimer" to="Game manager" method="_on_game_timer_timeout"]
-[connection signal="timeout" from="Game manager/newPowerupTimer" to="Game manager" method="_on_new_powerup_timer_timeout"]
+[connection signal="timeout" from="PowerupSpawner/newPowerupTimer" to="PowerupSpawner" method="_on_new_powerup_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

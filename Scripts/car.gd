@@ -36,8 +36,8 @@ extends CharacterBody2D
 @onready var stun_timer: Timer = $stunTimer
 @onready var mainCamera = $"../../Camera2D" #Ugly!
 @onready var game_manager: Node = $"../../Game manager"
-@onready var speedBoostParticleEmitter: GPUParticles2D = $"../../Game manager/SpeedPickupParticles"
-@onready var timeBoostParticleEmitter: GPUParticles2D = $"../../Game manager/TimePickupParticles"
+@onready var speedBoostParticleEmitter: GPUParticles2D = $"../../PowerupSpawner/SpeedPickupParticles"
+@onready var timeBoostParticleEmitter: GPUParticles2D = $"../../PowerupSpawner/TimePickupParticles"
 @onready var carFireParticleEmitter: GPUParticles2D = $"../FireParticleEmitter"
 @onready var spriteStack: Node2D = $SpriteStack
 @onready var spriteStackBaseAngle = spriteStack.get_rotation_degrees()
