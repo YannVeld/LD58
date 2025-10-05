@@ -1,16 +1,53 @@
-[gd_scene load_steps=4 format=3 uid="uid://bx0rsctr7l8aw"]
+[gd_scene load_steps=8 format=3 uid="uid://bx0rsctr7l8aw"]
 
-[ext_resource type="Script" path="res://Scripts/speed_up.gd" id="1_2nesi"]
-[ext_resource type="Texture2D" uid="uid://euk13n5vuy58" path="res://Sprites/redSquare.png" id="1_s8pff"]
+[ext_resource type="Script" uid="uid://3hn8vsojtv8" path="res://Scripts/speed_up.gd" id="1_2nesi"]
+[ext_resource type="Texture2D" uid="uid://4vnplxqy4hng" path="res://Sprites/Powerup_speed.png" id="2_2nesi"]
 [ext_resource type="PackedScene" uid="uid://d3e3e26o28k7h" path="res://Scenes/Pickup.tscn" id="3_0mhh1"]
+[ext_resource type="Texture2D" uid="uid://btcnpmb0axnld" path="res://Sprites/PickupParticle.png" id="3_tjev1"]
+
+[sub_resource type="Curve" id="Curve_0mhh1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5888889, 1), 0.0, 0.0, 0, 0, Vector2(0.9944445, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tjev1"]
+curve = SubResource("Curve_0mhh1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_redno"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -2, 0)
+emission_shape = 3
+emission_box_extents = Vector3(5, 1, 1)
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+spread = 0.0
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = -2.2351742e-05
+gravity = Vector3(0, -30, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = -2.2351742e-06
+tangential_accel_min = -2.2351742e-06
+tangential_accel_max = -2.2351742e-06
+damping_min = 10.0
+damping_max = 20.0
+scale_curve = SubResource("CurveTexture_tjev1")
 
 [node name="SpeedUp" type="Node2D"]
 position = Vector2(-110, -94)
 script = ExtResource("1_2nesi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_s8pff")
+texture = ExtResource("2_2nesi")
+offset = Vector2(0.44, -3.66)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
+z_index = -5
+amount = 20
+amount_ratio = 0.8
+texture = ExtResource("3_tjev1")
+lifetime = 2.0
+preprocess = 1.0
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_redno")
 
 [node name="Pickup" parent="." instance=ExtResource("3_0mhh1")]
 type = "Speed Up"

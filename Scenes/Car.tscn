@@ -29,6 +29,7 @@ shakeDuration = 0.2
 shakeMagintude = 3.0
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+visible = false
 rotation = 1.5707964
 texture = ExtResource("10_uvy3y")
 

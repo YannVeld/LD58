@@ -26,6 +26,8 @@ const BONUS_STEERING_ANGLE = 5
 
 @onready var game_manager: Node = $"../../Game manager"
 
+@onready var speedBoostParticleEmitter: GPUParticles2D = $"../../Game manager/SpeedPickupParticles"
+
 var friction = -55/110.0 * 3
 var drag = -0.06
 
@@ -99,7 +101,7 @@ func _on_stun_timer_timeout() -> void:
 	print("Unstunned now")
 	stunned = false
 	
-func pickup(type):
+func pickup(type: String, pickup: Node2D):
 	print('detected pickup')
 	if type=='Extra Time':
 		print('extra time' )
@@ -114,6 +116,10 @@ func pickup(type):
 		speedupTimer.one_shot= true
 		speedupTimer.start()
 		speedupTimer.timeout.connect(_on_timer_timeout)
+		
+		speedBoostParticleEmitter.global_position = pickup.get_parent().global_position
+		speedBoostParticleEmitter.restart()
+		
 	else:
 		print("Something is wrong with the powerup")
 
