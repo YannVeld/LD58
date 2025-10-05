@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dfj84yr8nx8kn"]
 
-[ext_resource type="Texture2D" uid="uid://bi2ertktpn8qj" path="res://Sprites/yellowCircle.png" id="1_kgku5"]
+[ext_resource type="Texture2D" uid="uid://wo7pjjg7lygh" path="res://Sprites/LetterGetEffect.png" id="1_kgku5"]
 [ext_resource type="Script" uid="uid://cpoyssqo1h1on" path="res://Scripts/gain_letter_effect.gd" id="2_3m8wq"]
 
 [node name="GainLetterEffect" type="Sprite2D"]
@@ -8,8 +8,8 @@ z_index = 1000
 position = Vector2(-1, 0)
 texture = ExtResource("1_kgku5")
 script = ExtResource("2_3m8wq")
-markerOffset = Vector2(0, -32)
-yshift = 20.0
+markerOffset = Vector2(0, -48)
+yshift = 32.0
 
 [node name="animTimer" type="Timer" parent="."]
 wait_time = 0.5
