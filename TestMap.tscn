@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://codft0po2y0u8" path="res://Sprites/GrassPuff2.png" id="4_43vq4"]
 [ext_resource type="Texture2D" uid="uid://bnbghtksp1ndq" path="res://Sprites/GrassPuff3.png" id="5_d4kuo"]
 [ext_resource type="Script" uid="uid://nx6bt0oiyarw" path="res://Scripts/stunzone.gd" id="17_wvj8d"]
+[ext_resource type="PackedScene" path="res://Scenes/ExtraTime.tscn" id="12_4l0jn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ix1e5"]
 texture = ExtResource("2_lulwx")
