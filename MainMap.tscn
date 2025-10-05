@@ -1,6 +1,7 @@
-[gd_scene load_steps=31 format=4 uid="uid://c42dpnccxkfab"]
+[gd_scene load_steps=32 format=4 uid="uid://c42dpnccxkfab"]
 
 [ext_resource type="Texture2D" uid="uid://cu26ucumncc1l" path="res://Sprites/Speedometer.png" id="1_57nyl"]
+[ext_resource type="Texture2D" uid="uid://dy8rgc3tipp2n" path="res://Sprites/GroundTile.png" id="1_pkdq6"]
 [ext_resource type="Texture2D" uid="uid://d4k3hnooeibql" path="res://Sprites/Speedometer_indicator.png" id="2_pkdq6"]
 [ext_resource type="Script" uid="uid://iygveoybec2n" path="res://Scripts/speed_indicator.gd" id="3_qrjo1"]
 [ext_resource type="Texture2D" uid="uid://b2ita7muh0qmv" path="res://Sprites/TimerUI.png" id="4_5mpjp"]
@@ -87,7 +88,17 @@ distance = -319.0
 normal = Vector2(-1, 0)
 distance = -321.0
 
-[node name="TestMap" type="Node2D"]
+[node name="MainMap" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1000
+offset_left = -451.0
+offset_top = -250.0
+offset_right = 491.0
+offset_bottom = 282.0
+texture = ExtResource("1_pkdq6")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="UI Overlay" type="Node" parent="."]
 
