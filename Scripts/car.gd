@@ -19,6 +19,7 @@ extends CharacterBody2D
 @export var shakeDuration: float = 0.5
 @export var shakeMagintude: float = 5
 
+@onready var game_manager: Node = $"../../Game manager"
 
 var friction = -55/110.0 * 3
 var drag = -0.06
@@ -92,3 +93,9 @@ func handle_mail_pickup():
 func _on_stun_timer_timeout() -> void:
 	print("Unstunned now")
 	stunned = false
+	
+func pickup(type):
+	print('detected pickup')
+	if type=='Extra Time':
+		print('extra time' )
+		game_manager.add_time()

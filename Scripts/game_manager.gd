@@ -45,6 +45,9 @@ func score_collection(timeLeft):
 func _on_game_timer_timeout() -> void:
 	game_over()
 	
+func add_time():
+	gameTimer.start(gameTimer.time_left + 5.0)
+	
 func game_over():
 	Global.score = score
 	print("Game over! Your score is ", score)

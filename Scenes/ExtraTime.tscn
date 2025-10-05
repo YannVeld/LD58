@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh3ranxljax74"]
+
+[ext_resource type="Script" uid="uid://bws5fp52dcfq7" path="res://Scripts/extra_time.gd" id="1_apmon"]
+[ext_resource type="Texture2D" uid="uid://bi2ertktpn8qj" path="res://Sprites/yellowCircle.png" id="1_dqeyy"]
+[ext_resource type="PackedScene" uid="uid://d3e3e26o28k7h" path="res://Scenes/Pickup.tscn" id="2_apmon"]
+
+[node name="ExtraTime" type="Node2D"]
+script = ExtResource("1_apmon")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_dqeyy")
+
+[node name="Pickup" parent="." instance=ExtResource("2_apmon")]
+
+[connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]
