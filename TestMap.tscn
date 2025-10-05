@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cr8ljerwlh3mh" path="res://Scenes/Car.tscn" id="1_jlwbg"]
 [ext_resource type="Script" uid="uid://hifry41mk1qo" path="res://Scripts/game_manager.gd" id="1_onbnv"]
 [ext_resource type="PackedScene" uid="uid://r0d141lg2pk5" path="res://Scenes/Building.tscn" id="2_g3g4i"]
-[ext_resource type="Script" uid="uid://dbidk6nojye6j" path="res://grass_puff_spawner.gd" id="2_ix1e5"]
+[ext_resource type="Script" uid="uid://dbidk6nojye6j" path="res://Scripts/grass_puff_spawner.gd" id="2_ix1e5"]
 [ext_resource type="Texture2D" uid="uid://rhmwu6t2b8kd" path="res://Sprites/RoadTiles/RoadTilesAtlas.png" id="2_lulwx"]
 [ext_resource type="Texture2D" uid="uid://q3upigilc2c5" path="res://Sprites/GrassPuff1.png" id="3_4ykif"]
 [ext_resource type="PackedScene" uid="uid://ddm6vp0cbx0f4" path="res://Scenes/Mailbox.tscn" id="3_xxdj2"]
@@ -67,12 +67,14 @@ autostart = true
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="GrassPuffSpawner" type="Node2D" parent="." node_paths=PackedStringArray("roadTileMapLayer")]
+z_index = -100
 script = ExtResource("2_ix1e5")
 puffCount = 100
 puffSprites = Array[Texture2D]([ExtResource("3_4ykif"), ExtResource("4_43vq4"), ExtResource("5_d4kuo")])
 roadTileMapLayer = NodePath("../TileMapLayer")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = -100
 position = Vector2(-10, -91)
 tile_map_data = PackedByteArray("AAD///7/OgADAAAAAAD+////OgACAAEAAAD+/wAAOgACAAEAAAD9/wEAOgACAAAAAAD+/wIAOgADAAEAAAD+/wMAOgABAAEAAAD//wQAOgAAAAAAAAD+/wUAOgACAAIAAAD+/wYAOgABAAAAAAD//wYAOgABAAEAAAD//wcAOgABAAAAAAAAAAYAOgACAAEAAAAAAAUAOgACAAEAAAABAAQAOgACAAEAAAABAAMAOgACAAEAAAACAAIAOgAAAAAAAAABAAEAOgABAAEAAAABAAAAOgACAAAAAAABAP//OgAAAAAAAAABAP7/OgABAAEAAAAAAP3/OgADAAAAAAAAAP7/OgACAAEAAAD/////OgABAAAAAAD9/wUAOgABAAEAAAD9/wQAOgACAAAAAAD9/wMAOgACAAEAAAA=")
 tile_set = SubResource("TileSet_hvnfr")

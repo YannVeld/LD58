@@ -40,5 +40,8 @@ func _process(delta: float) -> void:
 		sprite2d.global_position.y -= offset * _n
 		
 		sprite2d.scale = myScale
+		
+		var screenHeight = get_viewport_rect().size.y
+		sprite2d.z_index = screenHeight/2 + global_position.y
 	
 	pass
