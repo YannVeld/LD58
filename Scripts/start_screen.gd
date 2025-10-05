@@ -2,7 +2,7 @@ extends Control
 
 
 func _on_instructions_pressed() -> void:
-	get_tree().change_scene_to_file("res://TestMap.tscn")
+	get_tree().change_scene_to_file("res://InstructionsScreen.tscn")
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
