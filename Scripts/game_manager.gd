@@ -46,4 +46,6 @@ func _on_game_timer_timeout() -> void:
 	game_over()
 	
 func game_over():
+	Global.score = score
 	print("Game over! Your score is ", score)
+	get_tree().change_scene_to_file("res://GameOverScreen.tscn")

@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu5s658y2avl1"]
+
+[ext_resource type="Script" uid="uid://cswep2ilbdsqp" path="res://Scripts/instruction_screen.gd" id="1_7xw76"]
+
+[node name="InstructionsScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_7xw76")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -156.0
+offset_top = 132.0
+offset_right = 156.0
+offset_bottom = 163.0
+size_flags_vertical = 3
+
+[node name="Back" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Back"
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = -277.0
+offset_top = -138.0
+offset_right = 273.0
+offset_bottom = 95.0
+text = "You are a mailman and you must pick up as much mail as possible before time runs out.
+
+Press Up/W to hit the gas, Down/S to brake or reverse, and Left/A and Right/D to turn.
+
+Try not to ding the car"
+wrap_mode = 1
+
+[connection signal="pressed" from="Buttons/Back" to="." method="_on_back_pressed"]

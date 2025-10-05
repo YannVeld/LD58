@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="TestGame"
-run/main_scene="uid://bv4e4ssw5lhku"
+run/main_scene="uid://cknbjjbxcall3"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://Scripts/global.gd"
 
 [display]
 

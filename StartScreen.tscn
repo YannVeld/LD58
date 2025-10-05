@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://cknbjjbxcall3"]
+
+[ext_resource type="Script" uid="uid://c24fxbjgpvjmp" path="res://Scripts/start_screen.gd" id="1_s4vtk"]
+
+[node name="StartScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_s4vtk")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -156.0
+offset_top = 20.0
+offset_right = 156.0
+offset_bottom = 121.0
+size_flags_vertical = 3
+
+[node name="Start Game" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Start
+"
+
+[node name="Instructions" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Instructions"
+
+[node name="Quit" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Quit
+"
+
+[connection signal="button_down" from="Buttons/Start Game" to="." method="_on_start_game_button_down"]
+[connection signal="pressed" from="Buttons/Start Game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Buttons/Instructions" to="." method="_on_instructions_pressed"]
+[connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit_pressed"]
