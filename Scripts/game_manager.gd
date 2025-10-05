@@ -14,8 +14,8 @@ extends Node
 @export var scoreThreshold = 2
 
 func _process(float) -> void:
-	scoreLabel.text = 'Score: ' + str(score)
-	game_time.text = 'Time left: ' + str(int(gameTimer.time_left))
+	scoreLabel.text = str(score)
+	game_time.text = str(int(gameTimer.time_left))
 
 func _ready():
 		activate_mailbox()

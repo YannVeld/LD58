@@ -1,7 +1,10 @@
-[gd_scene load_steps=15 format=4 uid="uid://bv4e4ssw5lhku"]
+[gd_scene load_steps=18 format=4 uid="uid://bv4e4ssw5lhku"]
 
+[ext_resource type="FontFile" uid="uid://cn4n80ikqjwnu" path="res://Fonts/m6x11.ttf" id="1_43vq4"]
 [ext_resource type="PackedScene" uid="uid://cr8ljerwlh3mh" path="res://Scenes/Car.tscn" id="1_jlwbg"]
 [ext_resource type="Script" uid="uid://hifry41mk1qo" path="res://Scripts/game_manager.gd" id="1_onbnv"]
+[ext_resource type="Texture2D" uid="uid://b2ita7muh0qmv" path="res://Sprites/TimerUI.png" id="2_4eb8c"]
+[ext_resource type="Texture2D" uid="uid://cu26ucumncc1l" path="res://Sprites/Speedometer.png" id="2_27pcn"]
 [ext_resource type="FontFile" uid="uid://dlvhgtbpfmmr0" path="res://Fonts/m5x7.ttf" id="2_d4kuo"]
 [ext_resource type="PackedScene" uid="uid://r0d141lg2pk5" path="res://Scenes/Building.tscn" id="2_g3g4i"]
 [ext_resource type="Script" uid="uid://dbidk6nojye6j" path="res://Scripts/grass_puff_spawner.gd" id="2_ix1e5"]
@@ -40,20 +43,37 @@ size = Vector2(20, 62)
 
 [node name="UI Overlay" type="Node" parent="."]
 
+[node name="Speedometer" type="Sprite2D" parent="UI Overlay"]
+z_index = 1000
+position = Vector2(-320, 199)
+texture = ExtResource("2_27pcn")
+offset = Vector2(56, -56)
+
+[node name="TimerAndScore" type="Sprite2D" parent="UI Overlay"]
+z_index = 1000
+position = Vector2(320, 198)
+texture = ExtResource("2_4eb8c")
+offset = Vector2(-56, -56)
+
 [node name="Score" type="Label" parent="UI Overlay"]
-offset_left = 237.0
-offset_top = -173.0
-offset_right = 289.0
-offset_bottom = -150.0
+z_index = 1200
+offset_left = 267.0
+offset_top = 157.0
+offset_right = 319.0
+offset_bottom = 180.0
 theme_override_fonts/font = ExtResource("2_d4kuo")
-text = "Score: "
+text = "99"
 
 [node name="GameTime" type="Label" parent="UI Overlay"]
-offset_left = -303.0
-offset_top = -168.0
-offset_right = -263.0
-offset_bottom = -145.0
-theme_override_fonts/font = ExtResource("2_d4kuo")
+z_index = 1200
+offset_left = 245.0
+offset_top = 128.0
+offset_right = 285.0
+offset_bottom = 151.0
+theme_override_fonts/font = ExtResource("1_43vq4")
+theme_override_font_sizes/font_size = 16
+text = "9:99"
+horizontal_alignment = 1
 
 [node name="Game manager" type="Node" parent="."]
 unique_name_in_owner = true
