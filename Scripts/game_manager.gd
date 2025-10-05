@@ -13,6 +13,9 @@ extends Node
 
 @export var scoreThreshold = 2
 
+@onready var car = %"Car"
+@onready var letterEffectScene = preload("res://Scenes/gain_letter_effect.tscn")
+
 func _process(float) -> void:
 	scoreLabel.text = str(score)
 	game_time.text = str(int(gameTimer.time_left))
@@ -40,6 +43,7 @@ func score_collection(timeLeft):
 		score += 10
 	else:
 		score += 5
+	pickup_effect()
 	print("score = ", score )
 
 func _on_game_timer_timeout() -> void:
@@ -52,3 +56,9 @@ func game_over():
 	Global.score = score
 	print("Game over! Your score is ", score)
 	get_tree().change_scene_to_file("res://GameOverScreen.tscn")
+
+func pickup_effect():
+	var _scene = letterEffectScene.instantiate()
+	car.add_child(_scene)
+	_scene.nodeToFollow = car.get_node("CharacterBody2D")
+	
