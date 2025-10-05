@@ -39,6 +39,7 @@ extends CharacterBody2D
 @onready var speedBoostParticleEmitter: GPUParticles2D = $"../../PowerupSpawner/SpeedPickupParticles"
 @onready var timeBoostParticleEmitter: GPUParticles2D = $"../../PowerupSpawner/TimePickupParticles"
 @onready var carFireParticleEmitter: GPUParticles2D = $"../FireParticleEmitter"
+@onready var driftParticleEmitter: GPUParticles2D = $"../DriftParticleEmitter"
 @onready var spriteStack: Node2D = $SpriteStack
 @onready var spriteStackBaseAngle = spriteStack.get_rotation_degrees()
 
@@ -210,7 +211,21 @@ func _handle_fire_particle_emission() -> void:
 	
 	carFireParticleEmitter.set_emitting(true)
 
+func _handle_drift_particle_emission() -> void:
+	var startEmittingTime = fakeDriftingHoldTime * 3 / 4
+	
+	if Input.is_action_pressed("brake"): 
+		driftParticleEmitter.set_emitting(false)
+		return
+		
+	if _timeSinceSteerPress < startEmittingTime:
+		driftParticleEmitter.set_emitting(false)
+		return
+	
+	driftParticleEmitter.set_emitting(true)
+
 
 
 func _process(delta: float) -> void:
 	_handle_fire_particle_emission()
+	_handle_drift_particle_emission()
