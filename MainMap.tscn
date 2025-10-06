@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://c42dpnccxkfab"]
+[gd_scene load_steps=34 format=4 uid="uid://c42dpnccxkfab"]
 
 [ext_resource type="Texture2D" uid="uid://cu26ucumncc1l" path="res://Sprites/Speedometer.png" id="1_57nyl"]
 [ext_resource type="Texture2D" uid="uid://dy8rgc3tipp2n" path="res://Sprites/GroundTile.png" id="1_pkdq6"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://cn4n80ikqjwnu" path="res://Fonts/m6x11.ttf" id="6_wcwa3"]
 [ext_resource type="Script" uid="uid://hifry41mk1qo" path="res://Scripts/game_manager.gd" id="7_cnnge"]
 [ext_resource type="Script" uid="uid://bnlmexfwxaefa" path="res://Scripts/powerup_spawner.gd" id="8_0rddn"]
+[ext_resource type="Script" uid="uid://drilq88dqb37j" path="res://Scripts/countdown_manager.gd" id="8_5mpjp"]
 [ext_resource type="Texture2D" uid="uid://btcnpmb0axnld" path="res://Sprites/PickupParticle.png" id="9_53nem"]
 [ext_resource type="Texture2D" uid="uid://c0oij7uwp4pnf" path="res://Sprites/PickupParticle_yellow.png" id="10_56bqw"]
 [ext_resource type="Script" uid="uid://oibyg4q57ab3" path="res://Scripts/camera_shaker.gd" id="11_nlfjb"]
@@ -146,6 +147,20 @@ theme_override_fonts/font = ExtResource("6_wcwa3")
 theme_override_font_sizes/font_size = 16
 text = "9:99"
 horizontal_alignment = 1
+
+[node name="Countdown" type="Label" parent="UI Overlay"]
+z_index = 1200
+offset_right = 7.0
+offset_bottom = 14.0
+scale = Vector2(10, 10)
+pivot_offset = Vector2(3.5, 7)
+theme_override_colors/font_color = Color(0.9843137, 0.57254905, 0.16862746, 1)
+theme_override_fonts/font = ExtResource("6_wcwa3")
+theme_override_font_sizes/font_size = 16
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("8_5mpjp")
 
 [node name="Game manager" type="Node" parent="."]
 unique_name_in_owner = true

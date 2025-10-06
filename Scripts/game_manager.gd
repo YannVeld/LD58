@@ -22,7 +22,7 @@ extends Node
 
 func _process(float) -> void:
 	scoreLabel.text = str(score)
-	game_time.text = str(int(gameTimer.time_left))
+	game_time.text = str(int(gameTimer.time_left) + 1)
 
 func _ready():
 		activate_mailbox()
