@@ -4,6 +4,7 @@ extends Node2D
 @export var puffSprites: Array[Texture2D]
 
 @export var roadTileMapLayer: TileMapLayer
+@export var grassPuffScale: float = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,12 +15,16 @@ func _ready() -> void:
 		var sprite2d = Sprite2D.new()
 		add_child(sprite2d)
 		sprite2d.texture = puffSprites.pick_random()
+		sprite2d.set_scale(Vector2(grassPuffScale, grassPuffScale))
 
 		# Avoid spawning on the road
 		var cell = 0
 		while not (cell == null):
 			var pos = Vector2(rng.randi_range(-screenSize.x/2,screenSize.x/2), rng.randi_range(-screenSize.y/2,screenSize.y/2))
 			sprite2d.global_position = pos
+
+			if not roadTileMapLayer:
+				break
 
 			var posRelToTilemap = roadTileMapLayer.to_local(pos)
 			var cellCoords = roadTileMapLayer.local_to_map(posRelToTilemap)
