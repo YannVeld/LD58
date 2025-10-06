@@ -42,7 +42,10 @@ extends CharacterBody2D
 @onready var driftParticleEmitter: GPUParticles2D = $"../DriftParticleEmitter"
 @onready var spriteStack: Node2D = $SpriteStack
 @onready var spriteStackBaseAngle = spriteStack.get_rotation_degrees()
+
+
 @onready var bumpSoundPlayer: AudioStreamPlayer = $"../BumpSoundPlayer"
+@onready var speedupSoundPlayer: AudioStreamPlayer = $"../SpeedupSoundPlayer"
 
 
 @onready var spawnPosition = position
@@ -251,6 +254,7 @@ func pickup(type: String, pickup: Node2D):
 		speedBoostParticleEmitter.restart()
 		
 		mainCamera.shake(boostPickupShakeDuration, boostPickupShakeMagnitude)
+		speedupSoundPlayer.play()
 		
 	else:
 		print("WARNING: Something is wrong with the powerup")

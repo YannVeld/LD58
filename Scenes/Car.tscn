@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cr8ljerwlh3mh"]
+[gd_scene load_steps=28 format=3 uid="uid://cr8ljerwlh3mh"]
 
 [ext_resource type="Script" uid="uid://ylfclj4c2uk7" path="res://Scripts/car.gd" id="1_8tfcp"]
 [ext_resource type="PackedScene" uid="uid://cjjrpk3rxk1m1" path="res://Scenes/sprite_stack.tscn" id="3_7iea3"]
@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://cmc8jpphqmlbv" path="res://Sounds/EngineStopSound.wav" id="19_uvy3y"]
 [ext_resource type="AudioStream" uid="uid://664r8rfonqy7" path="res://Sounds/EngineStartSound.wav" id="20_k8vma"]
 [ext_resource type="AudioStream" uid="uid://yo4ci7t2x4oy" path="res://Sounds/Bump2.wav" id="21_pkjdc"]
+[ext_resource type="AudioStream" uid="uid://cd1dapw0xs750" path="res://Sounds/Speedup.wav" id="22_y0bmx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ci6hu"]
 radius = 4.0
@@ -151,7 +152,13 @@ stream = ExtResource("21_pkjdc")
 volume_db = -19.692
 bus = &"SoundEffects"
 
+[node name="SpeedupSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_y0bmx")
+volume_db = -19.053
+bus = &"SoundEffects"
+
 [connection signal="timeout" from="CharacterBody2D/stunTimer" to="CharacterBody2D" method="_on_stun_timer_timeout"]
 [connection signal="finished" from="EngineSoundPlayer" to="EngineSoundPlayer" method="_on_finished"]
 [connection signal="finished" from="EngineSoundPlayer/EngineStartSoundPlayer" to="EngineSoundPlayer" method="_on_engine_start_sound_player_finished"]
 [connection signal="finished" from="BumpSoundPlayer" to="EngineSoundPlayer" method="_on_engine_start_sound_player_finished"]
+[connection signal="finished" from="SpeedupSoundPlayer" to="EngineSoundPlayer" method="_on_engine_start_sound_player_finished"]
