@@ -42,6 +42,8 @@ extends CharacterBody2D
 @onready var driftParticleEmitter: GPUParticles2D = $"../DriftParticleEmitter"
 @onready var spriteStack: Node2D = $SpriteStack
 @onready var spriteStackBaseAngle = spriteStack.get_rotation_degrees()
+@onready var bumpSoundPlayer: AudioStreamPlayer = $"../BumpSoundPlayer"
+
 
 @onready var spawnPosition = position
 @onready var spawnRotation = rotation
@@ -180,6 +182,7 @@ func handle_collision(object: Area2D):
 		stunned = true
 		stun_timer.start()
 		mainCamera.shake(collisionShakeDuration, collisionShakeDuration)
+		bumpSoundPlayer.play()
 		return
 		
 	# Check for gracing wall to the right
