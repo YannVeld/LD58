@@ -139,6 +139,7 @@ pitch_scale = 0.81
 bus = &"EngineEffects"
 script = ExtResource("18_vgdtx")
 pitchScaleWithBoost = 0.9
+pitchChangeSmoothing = 0.2
 
 [node name="EngineStopSoundPlayer" type="AudioStreamPlayer" parent="EngineSoundPlayer"]
 stream = ExtResource("19_uvy3y")

@@ -7,6 +7,10 @@ extends AudioStreamPlayer
 @export var pitchScaleWithBoost: float = 0.8
 @onready var normalPitch = get_pitch_scale()
 
+@export var pitchScaleChangeInTurn: float = -0.02
+@export var pitchTurnHoldtime: float = 0.5
+@export_range(0,1) var pitchChangeSmoothing: float = 0.5
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -23,16 +27,26 @@ func _stop_playing() -> void:
 	startSoundPlayer.set_playing(false)
 
 func _set_pitch() -> void:
-	set_pitch_scale(normalPitch)
-	stopSoundPlayer.set_pitch_scale(normalPitch)
-	startSoundPlayer.set_pitch_scale(normalPitch)
+	var _target_pitch = normalPitch
+
+	# Change pitch on speed boost
+	if carBody.speedupTimer and (carBody.speedupTimer.time_left > 0):
+		_target_pitch = pitchScaleWithBoost
 	
-	if not carBody.speedupTimer:
-		return
-	if carBody.speedupTimer.time_left > 0:
-		set_pitch_scale(pitchScaleWithBoost)
-		stopSoundPlayer.set_pitch_scale(pitchScaleWithBoost)
-		startSoundPlayer.set_pitch_scale(pitchScaleWithBoost)
+	# Change pitch on steering
+	var _frac = carBody._timeSinceSteerPress / pitchTurnHoldtime
+	_frac = clampf(_frac, 0, 1)
+	var _pitch_change = lerpf(0, pitchScaleChangeInTurn, _frac)
+	_target_pitch += _pitch_change
+	
+	# Smoothly change pitch
+	var _current_pitch = get_pitch_scale()
+	var _new_pitch = lerpf( _current_pitch, _target_pitch, pitchChangeSmoothing )
+	
+	# Set new pitch
+	set_pitch_scale(_new_pitch)
+	stopSoundPlayer.set_pitch_scale(_new_pitch)
+	startSoundPlayer.set_pitch_scale(_new_pitch)
 	
 
 func _process(delta: float) -> void:
