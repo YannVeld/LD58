@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cr8ljerwlh3mh"]
+[gd_scene load_steps=32 format=3 uid="uid://cr8ljerwlh3mh"]
 
 [ext_resource type="Script" uid="uid://ylfclj4c2uk7" path="res://Scripts/car.gd" id="1_8tfcp"]
 [ext_resource type="PackedScene" uid="uid://cjjrpk3rxk1m1" path="res://Scenes/sprite_stack.tscn" id="3_7iea3"]
@@ -24,6 +24,8 @@
 [ext_resource type="AudioStream" uid="uid://cd1dapw0xs750" path="res://Sounds/Speedup.wav" id="22_y0bmx"]
 [ext_resource type="AudioStream" uid="uid://bd4qn2exee2ap" path="res://Sounds/TimePickup.wav" id="23_0r10i"]
 [ext_resource type="AudioStream" uid="uid://d065uqdqylo30" path="res://Sounds/PickupMail.wav" id="24_532pt"]
+[ext_resource type="AudioStream" uid="uid://qymbpoy5chb5" path="res://Sounds/DriftSound.wav" id="25_g0gve"]
+[ext_resource type="Script" uid="uid://b648l64bur87g" path="res://Scripts/car_drift_sound_handler.gd" id="26_btbyr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ci6hu"]
 radius = 4.0
@@ -171,10 +173,15 @@ stream = ExtResource("24_532pt")
 volume_db = -4.899
 bus = &"SoundEffects"
 
+[node name="DriftSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_g0gve")
+volume_db = 8.639
+autoplay = true
+bus = &"SoundEffects"
+script = ExtResource("26_btbyr")
+minSpeedForDriftSound = 120.0
+
 [connection signal="timeout" from="CharacterBody2D/stunTimer" to="CharacterBody2D" method="_on_stun_timer_timeout"]
 [connection signal="finished" from="EngineSoundPlayer" to="EngineSoundPlayer" method="_on_finished"]
 [connection signal="finished" from="EngineSoundPlayer/EngineStartSoundPlayer" to="EngineSoundPlayer" method="_on_engine_start_sound_player_finished"]
-[connection signal="finished" from="BumpSoundPlayer" to="EngineSoundPlayer" method="_on_engine_start_sound_player_finished"]
-[connection signal="finished" from="SpeedupSoundPlayer" to="EngineSoundPlayer" method="_on_engine_start_sound_player_finished"]
-[connection signal="finished" from="TimeSoundPlayer" to="EngineSoundPlayer" method="_on_engine_start_sound_player_finished"]
-[connection signal="finished" from="MailPickupSoundPlayer" to="EngineSoundPlayer" method="_on_engine_start_sound_player_finished"]
+[connection signal="finished" from="DriftSoundPlayer" to="DriftSoundPlayer" method="_on_finished"]
