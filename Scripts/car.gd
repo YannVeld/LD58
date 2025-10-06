@@ -47,6 +47,7 @@ extends CharacterBody2D
 @onready var bumpSoundPlayer: AudioStreamPlayer = $"../BumpSoundPlayer"
 @onready var speedupSoundPlayer: AudioStreamPlayer = $"../SpeedupSoundPlayer"
 @onready var timeSoundPlayer: AudioStreamPlayer = $"../TimeSoundPlayer"
+@onready var mailPickupSoundPlayer: AudioStreamPlayer = $"../MailPickupSoundPlayer"
 
 
 @onready var spawnPosition = position
@@ -225,8 +226,9 @@ func handle_collision(object: Area2D):
 	
 	
 func handle_mail_pickup():
-	#print("mail received")
-	pass
+	var _pitch = randf_range(0.8, 1.2)
+	mailPickupSoundPlayer.set_pitch_scale(_pitch)
+	mailPickupSoundPlayer.play()
 
 func _on_stun_timer_timeout() -> void:
 	#print("Unstunned now")
