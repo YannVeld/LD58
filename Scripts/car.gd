@@ -14,6 +14,7 @@ extends CharacterBody2D
 @export var traction_fast = 0.0
 @export var traction_slow = 0.7
 @export var on_collision_backward_velocity = 35
+@export_range(0,1) var on_collison_car_rotation_frac = 0.125
 
 @export_group("Boost settings")
 @export var speedBoostTime: float = 5
@@ -188,6 +189,15 @@ func handle_collision(object: Area2D):
 		stun_timer.start()
 		mainCamera.shake(collisionShakeDuration, collisionShakeDuration)
 		bumpSoundPlayer.play()
+		
+		# Rotate the car a little after collision
+		# To make it easier to drive away
+		var coll_pos = result.position
+		var vecToColl = (coll_pos - global_position).normalized()
+		var _ang = vecToColl.angle_to(velocity.normalized())
+		_ang = on_collison_car_rotation_frac * _ang
+		rotate(_ang)
+		
 		return
 		
 	# Check for gracing wall to the right
