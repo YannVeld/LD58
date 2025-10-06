@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cr8ljerwlh3mh"]
+[gd_scene load_steps=26 format=3 uid="uid://cr8ljerwlh3mh"]
 
 [ext_resource type="Script" uid="uid://ylfclj4c2uk7" path="res://Scripts/car.gd" id="1_8tfcp"]
 [ext_resource type="PackedScene" uid="uid://cjjrpk3rxk1m1" path="res://Scenes/sprite_stack.tscn" id="3_7iea3"]
@@ -16,6 +16,10 @@
 [ext_resource type="Texture2D" uid="uid://bpl7bud82nx0y" path="res://Sprites/VoxelCar/09_VoxelCarSlices.png" id="13_y0bmx"]
 [ext_resource type="Script" uid="uid://dkgivps7mlqsl" path="res://Scripts/car_speedup_particles.gd" id="15_7iea3"]
 [ext_resource type="Texture2D" uid="uid://bxr0l1jdwywuq" path="res://Sprites/DriftParticle.png" id="16_56b3i"]
+[ext_resource type="AudioStream" uid="uid://b3jcphfxim1qn" path="res://Sounds/EngineSound.wav" id="17_mloed"]
+[ext_resource type="Script" uid="uid://dgdj6602537wt" path="res://Scripts/car_engine_sound_handler.gd" id="18_vgdtx"]
+[ext_resource type="AudioStream" uid="uid://cmc8jpphqmlbv" path="res://Sounds/EngineStopSound.wav" id="19_uvy3y"]
+[ext_resource type="AudioStream" uid="uid://664r8rfonqy7" path="res://Sounds/EngineStartSound.wav" id="20_k8vma"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ci6hu"]
 radius = 4.0
@@ -125,4 +129,22 @@ randomness = 0.5
 process_material = SubResource("ParticleProcessMaterial_56b3i")
 script = ExtResource("15_7iea3")
 
+[node name="EngineSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_mloed")
+pitch_scale = 0.81
+bus = &"EngineEffects"
+script = ExtResource("18_vgdtx")
+
+[node name="EngineStopSoundPlayer" type="AudioStreamPlayer" parent="EngineSoundPlayer"]
+stream = ExtResource("19_uvy3y")
+pitch_scale = 0.81
+bus = &"EngineEffects"
+
+[node name="EngineStartSoundPlayer" type="AudioStreamPlayer" parent="EngineSoundPlayer"]
+stream = ExtResource("20_k8vma")
+pitch_scale = 0.81
+bus = &"EngineEffects"
+
 [connection signal="timeout" from="CharacterBody2D/stunTimer" to="CharacterBody2D" method="_on_stun_timer_timeout"]
+[connection signal="finished" from="EngineSoundPlayer" to="EngineSoundPlayer" method="_on_finished"]
+[connection signal="finished" from="EngineSoundPlayer/EngineStartSoundPlayer" to="EngineSoundPlayer" method="_on_engine_start_sound_player_finished"]
