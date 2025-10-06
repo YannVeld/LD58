@@ -16,8 +16,10 @@ extends Node
 @onready var car = %"Car"
 @onready var carBody = car.get_node("CharacterBody2D")
 @onready var letterEffectScene = preload("res://Scenes/gain_letter_effect.tscn")
+@onready var timePickupEffectScene = preload("res://Scenes/gain_time_effect.tscn")
 
 @export var minimalDistToCarForMailboxActivation: float = 0.0
+@export var timeToAddOnPickup: int = 5
 
 
 func _process(float) -> void:
@@ -25,7 +27,7 @@ func _process(float) -> void:
 	game_time.text = str(int(gameTimer.time_left) + 1)
 
 func _ready():
-		activate_mailbox()
+	activate_mailbox()
 		
 func activate_mailbox():
 	if len(inactive_mailboxes)>0:
@@ -68,7 +70,8 @@ func _on_game_timer_timeout() -> void:
 	game_over()
 	
 func add_time():
-	gameTimer.start(gameTimer.time_left + 5.0)
+	gameTimer.start(gameTimer.time_left + timeToAddOnPickup)
+	time_pickup_effect()
 	
 func game_over():
 	Global.score = score
@@ -79,3 +82,9 @@ func pickup_effect():
 	var _scene = letterEffectScene.instantiate()
 	car.add_child(_scene)
 	_scene.nodeToFollow = car.get_node("CharacterBody2D")
+	
+func time_pickup_effect():
+	var _scene = timePickupEffectScene.instantiate()
+	car.add_child(_scene)
+	_scene.nodeToFollow = car.get_node("CharacterBody2D")
+	_scene.numberToShow = timeToAddOnPickup

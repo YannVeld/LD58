@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://bw2tbpvi7d2a8"]
+
+[ext_resource type="Texture2D" uid="uid://d1it2xml0ut2p" path="res://Sprites/Clock.png" id="1_hquh5"]
+[ext_resource type="Script" uid="uid://ddh4o3hfc7fjw" path="res://Scenes/gain_time_effect.gd" id="2_hquh5"]
+[ext_resource type="FontFile" uid="uid://bhca2cdavjwxo" path="res://Fonts/m3x6.ttf" id="3_35t70"]
+
+[node name="GainTimeEffect" type="Sprite2D"]
+z_index = 1000
+position = Vector2(-1, 0)
+texture = ExtResource("1_hquh5")
+offset = Vector2(11.945, 0)
+script = ExtResource("2_hquh5")
+markerOffset = Vector2(0, -48)
+yshift = 16.0
+
+[node name="animTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -31.575
+offset_top = -25.825
+offset_right = -14.575001
+offset_bottom = -12.825
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(0, 6.5)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_35t70")
+text = "+10"
+horizontal_alignment = 2
+vertical_alignment = 1
