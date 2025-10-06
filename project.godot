@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="TestGame"
+config/name="Mailbox Mania"
+config/description="A game made by the pastry chef and Wuppos for Ludum Dare 58."
 run/main_scene="uid://cyl1s1cddbab3"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
