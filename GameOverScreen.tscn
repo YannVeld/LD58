@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://0r10hfupqw20"]
+[gd_scene load_steps=29 format=4 uid="uid://0r10hfupqw20"]
 
 [ext_resource type="Script" uid="uid://rs7wf8bupvw" path="res://Scripts/game_over_screen.gd" id="1_6a6fq"]
 [ext_resource type="Texture2D" uid="uid://dy8rgc3tipp2n" path="res://Sprites/GroundTile.png" id="2_h6k2j"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://codft0po2y0u8" path="res://Sprites/GrassPuff2.png" id="7_xhfe0"]
 [ext_resource type="Texture2D" uid="uid://cwd2bqckgo86l" path="res://Sprites/BigButton_highlighted.png" id="8_auesf"]
 [ext_resource type="Texture2D" uid="uid://bnbghtksp1ndq" path="res://Sprites/GrassPuff3.png" id="8_nklv4"]
+[ext_resource type="AudioStream" uid="uid://2x45gvcmsv5k" path="res://Sounds/FinishJingle.wav" id="16_auesf"]
 
 [sub_resource type="Image" id="Image_t5oax"]
 data = {
@@ -741,6 +742,11 @@ script = ExtResource("5_rgmw3")
 puffCount = 50
 puffSprites = Array[Texture2D]([ExtResource("6_gcgjs"), ExtResource("7_xhfe0"), ExtResource("8_nklv4")])
 grassPuffScale = 2.0
+
+[node name="FinishJinglePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_auesf")
+autoplay = true
+bus = &"SoundEffects"
 
 [connection signal="pressed" from="Buttons/Menu" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Buttons/Menu" to="." method="_on_menu_pressed"]
