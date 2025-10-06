@@ -33,7 +33,7 @@ scale_curve = SubResource("CurveTexture_tjev1")
 
 [node name="SpeedUp" type="Node2D"]
 script = ExtResource("1_2nesi")
-dontDespawnDistance = 128.0
+dontDespawnDistance = 160.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_2nesi")

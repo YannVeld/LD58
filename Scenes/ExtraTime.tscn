@@ -33,7 +33,7 @@ scale_curve = SubResource("CurveTexture_tjev1")
 
 [node name="ExtraTime" type="Node2D"]
 script = ExtResource("1_h0xvu")
-dontDespawnDistance = 64.0
+dontDespawnDistance = 160.0
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 texture = ExtResource("2_h0xvu")
