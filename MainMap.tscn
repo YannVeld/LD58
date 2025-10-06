@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://c42dpnccxkfab"]
+[gd_scene load_steps=35 format=4 uid="uid://c42dpnccxkfab"]
 
 [ext_resource type="Texture2D" uid="uid://cu26ucumncc1l" path="res://Sprites/Speedometer.png" id="1_57nyl"]
 [ext_resource type="Texture2D" uid="uid://dy8rgc3tipp2n" path="res://Sprites/GroundTile.png" id="1_pkdq6"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bnlmexfwxaefa" path="res://Scripts/powerup_spawner.gd" id="8_0rddn"]
 [ext_resource type="Script" uid="uid://drilq88dqb37j" path="res://Scripts/countdown_manager.gd" id="8_5mpjp"]
 [ext_resource type="Texture2D" uid="uid://btcnpmb0axnld" path="res://Sprites/PickupParticle.png" id="9_53nem"]
+[ext_resource type="AudioStream" uid="uid://1ovkj8klo3d" path="res://Sounds/CountdownSound.wav" id="9_r5iyf"]
 [ext_resource type="Texture2D" uid="uid://c0oij7uwp4pnf" path="res://Sprites/PickupParticle_yellow.png" id="10_56bqw"]
 [ext_resource type="Script" uid="uid://oibyg4q57ab3" path="res://Scripts/camera_shaker.gd" id="11_nlfjb"]
 [ext_resource type="Script" uid="uid://dbidk6nojye6j" path="res://Scripts/grass_puff_spawner.gd" id="12_jyihd"]
@@ -161,6 +162,11 @@ text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("8_5mpjp")
+
+[node name="CountdownSoundPlayer" type="AudioStreamPlayer" parent="UI Overlay/Countdown"]
+stream = ExtResource("9_r5iyf")
+volume_db = -14.154
+bus = &"SoundEffects"
 
 [node name="Game manager" type="Node" parent="."]
 unique_name_in_owner = true
