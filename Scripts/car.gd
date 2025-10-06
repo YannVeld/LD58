@@ -46,6 +46,7 @@ extends CharacterBody2D
 
 @onready var bumpSoundPlayer: AudioStreamPlayer = $"../BumpSoundPlayer"
 @onready var speedupSoundPlayer: AudioStreamPlayer = $"../SpeedupSoundPlayer"
+@onready var timeSoundPlayer: AudioStreamPlayer = $"../TimeSoundPlayer"
 
 
 @onready var spawnPosition = position
@@ -239,6 +240,8 @@ func pickup(type: String, pickup: Node2D):
 		
 		timeBoostParticleEmitter.global_position = pickup.get_parent().global_position
 		timeBoostParticleEmitter.restart()
+		
+		timeSoundPlayer.play()
 		
 	elif type=='Speed Up':
 		#print("Speed up activated")
