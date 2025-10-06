@@ -1,6 +1,75 @@
-[gd_scene load_steps=2 format=3 uid="uid://cyl1s1cddbab3"]
+[gd_scene load_steps=23 format=3 uid="uid://cyl1s1cddbab3"]
 
 [ext_resource type="Script" uid="uid://c24fxbjgpvjmp" path="res://Scripts/start_screen.gd" id="1_s4vtk"]
+[ext_resource type="FontFile" uid="uid://dlvhgtbpfmmr0" path="res://Fonts/m5x7.ttf" id="2_06rl2"]
+[ext_resource type="Texture2D" uid="uid://djm7gvq7hpitv" path="res://Sprites/BigButton.png" id="2_vno1p"]
+[ext_resource type="Texture2D" uid="uid://cm3fok8rtlc2a" path="res://Sprites/BigButton_pressed.png" id="3_gtard"]
+[ext_resource type="Texture2D" uid="uid://cwd2bqckgo86l" path="res://Sprites/BigButton_highlighted.png" id="4_vuion"]
+[ext_resource type="Texture2D" uid="uid://d1k4tdxuoux3j" path="res://Sprites/SmallButton.png" id="5_vuion"]
+[ext_resource type="Texture2D" uid="uid://wq5hovcllgv3" path="res://Sprites/SmallButton_pressed.png" id="6_06rl2"]
+[ext_resource type="FontFile" uid="uid://bhca2cdavjwxo" path="res://Fonts/m3x6.ttf" id="6_bhimr"]
+[ext_resource type="Texture2D" uid="uid://bvqjrpf0sbsd6" path="res://Sprites/SmallButton_highlighted.png" id="7_bhimr"]
+[ext_resource type="Texture2D" uid="uid://cvl3skfe4ik5c" path="res://Sprites/TitleScreen.png" id="10_xupoq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kwitn"]
+texture = ExtResource("5_vuion")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cx07w"]
+texture = ExtResource("6_06rl2")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_34ebw"]
+texture = ExtResource("7_bhimr")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4dcrr"]
+texture = ExtResource("6_06rl2")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bhimr"]
+texture = ExtResource("2_vno1p")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xupoq"]
+texture = ExtResource("3_gtard")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ykci1"]
+texture = ExtResource("4_vuion")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_343mv"]
+texture = ExtResource("3_gtard")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vuion"]
+texture = ExtResource("5_vuion")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_06rl2"]
+texture = ExtResource("6_06rl2")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j3bvg"]
+texture = ExtResource("7_bhimr")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6e3xe"]
+texture = ExtResource("6_06rl2")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
 [node name="StartScreen" type="Control"]
 layout_mode = 3
@@ -11,29 +80,72 @@ script = ExtResource("1_s4vtk")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Buttons" type="VBoxContainer" parent="."]
+[node name="Background" type="TextureRect" parent="."]
+z_index = -1000
 layout_mode = 0
-offset_left = -156.0
-offset_top = 20.0
-offset_right = 156.0
-offset_bottom = 121.0
-size_flags_vertical = 3
+offset_left = -320.0
+offset_top = -180.0
+scale = Vector2(2, 2)
+mouse_filter = 2
+texture = ExtResource("10_xupoq")
+
+[node name="Buttons" type="Node2D" parent="."]
+position = Vector2(0, 135)
+
+[node name="Instructions" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(60, 28)
+offset_left = -240.0
+offset_top = -28.0
+offset_right = -180.0
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("6_bhimr")
+theme_override_styles/normal = SubResource("StyleBoxTexture_kwitn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_cx07w")
+theme_override_styles/hover = SubResource("StyleBoxTexture_34ebw")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_4dcrr")
+text = "Instructions"
 
 [node name="Start Game" type="Button" parent="Buttons"]
-layout_mode = 2
+custom_minimum_size = Vector2(68, 36)
+offset_left = -68.0
+offset_top = -36.0
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("2_06rl2")
+theme_override_styles/normal = SubResource("StyleBoxTexture_bhimr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_xupoq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ykci1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_343mv")
 text = "Start
 "
 
-[node name="Instructions" type="Button" parent="Buttons"]
-layout_mode = 2
-text = "Instructions"
-
 [node name="Quit" type="Button" parent="Buttons"]
-layout_mode = 2
+custom_minimum_size = Vector2(60, 28)
+offset_left = 120.0
+offset_top = -28.0
+offset_right = 180.0
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("6_bhimr")
+theme_override_styles/normal = SubResource("StyleBoxTexture_vuion")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_06rl2")
+theme_override_styles/hover = SubResource("StyleBoxTexture_j3bvg")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_6e3xe")
 text = "Quit
 "
 
+[node name="Makers" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = -182.0
+offset_right = 165.0
+offset_bottom = -153.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(0.09803922, 0.23921569, 0.24705882, 1)
+theme_override_fonts/font = ExtResource("6_bhimr")
+text = "A game by the pastry chef & Wuppos
+for Ludum Dare 58"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Buttons/Instructions" to="." method="_on_instructions_pressed"]
 [connection signal="button_down" from="Buttons/Start Game" to="." method="_on_start_game_button_down"]
 [connection signal="pressed" from="Buttons/Start Game" to="." method="_on_start_game_pressed"]
-[connection signal="pressed" from="Buttons/Instructions" to="." method="_on_instructions_pressed"]
 [connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit_pressed"]
