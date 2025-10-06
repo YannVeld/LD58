@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://c42dpnccxkfab"]
+[gd_scene load_steps=36 format=4 uid="uid://c42dpnccxkfab"]
 
 [ext_resource type="Texture2D" uid="uid://cu26ucumncc1l" path="res://Sprites/Speedometer.png" id="1_57nyl"]
 [ext_resource type="Texture2D" uid="uid://dy8rgc3tipp2n" path="res://Sprites/GroundTile.png" id="1_pkdq6"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://ddm6vp0cbx0f4" path="res://Scenes/Mailbox.tscn" id="18_xtcp7"]
 [ext_resource type="PackedScene" uid="uid://cr8ljerwlh3mh" path="res://Scenes/Car.tscn" id="19_ek034"]
 [ext_resource type="Script" uid="uid://nx6bt0oiyarw" path="res://Scripts/stunzone.gd" id="20_02i7e"]
+[ext_resource type="PackedScene" uid="uid://c4kv2yiy1p4dl" path="res://Scenes/Store.tscn" id="21_wcwa3"]
 [ext_resource type="PackedScene" uid="uid://blbg660ijgbq1" path="res://Scenes/Tree.tscn" id="22_qrjo1"]
 
 [sub_resource type="Curve" id="Curve_upqcn"]
@@ -197,7 +198,7 @@ position = Vector2(218, 65)
 position = Vector2(-226, 68)
 
 [node name="SpeedPickupPosition2" type="Node2D" parent="PowerupSpawner"]
-position = Vector2(160, -62)
+position = Vector2(226, -36)
 
 [node name="newPowerupTimer" type="Timer" parent="PowerupSpawner"]
 wait_time = 10.0
@@ -261,12 +262,6 @@ position = Vector2(204, -159)
 [node name="Building7" parent="Buildings" instance=ExtResource("17_3lbbi")]
 position = Vector2(244, -137)
 
-[node name="Building8" parent="Buildings" instance=ExtResource("17_3lbbi")]
-position = Vector2(249, -79)
-
-[node name="Building9" parent="Buildings" instance=ExtResource("17_3lbbi")]
-position = Vector2(289, -59)
-
 [node name="Building11" parent="Buildings" instance=ExtResource("17_3lbbi")]
 position = Vector2(-120, -156)
 
@@ -315,6 +310,9 @@ scale = Vector2(-1, 1)
 
 [node name="Building12" parent="Buildings" instance=ExtResource("17_3lbbi")]
 position = Vector2(-187, 26)
+
+[node name="Store" parent="Buildings" instance=ExtResource("21_wcwa3")]
+position = Vector2(267, -68)
 
 [node name="Mailboxes" type="Node" parent="."]
 
@@ -367,7 +365,7 @@ rotation = -0.85836256
 shape = SubResource("RectangleShape2D_1y0um")
 
 [node name="Mailbox4" parent="Mailboxes" instance=ExtResource("18_xtcp7")]
-position = Vector2(246, -58)
+position = Vector2(217, -73)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mailboxes/Mailbox4"]
 position = Vector2(-8, 20)

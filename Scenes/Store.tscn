@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4kv2yiy1p4dl"]
+
+[ext_resource type="Script" uid="uid://nx6bt0oiyarw" path="res://Scripts/stunzone.gd" id="1_sgl0o"]
+[ext_resource type="Texture2D" uid="uid://c370fedixasno" path="res://Sprites/ConvenienceStore.png" id="2_fy3ub"]
+[ext_resource type="Script" uid="uid://cws020m0vvuio" path="res://Scripts/set_zindex_from_ypos.gd" id="3_s6qn6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fy3ub"]
+size = Vector2(28.621655, 22.375004)
+
+[node name="Store" type="Area2D" groups=["Buildings"]]
+script = ExtResource("1_sgl0o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 18)
+texture = ExtResource("2_fy3ub")
+offset = Vector2(0, -18)
+script = ExtResource("3_s6qn6")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-8, 11)
+rotation = 0.43943545
+scale = Vector2(0.99999964, 0.9999997)
+skew = 0.65275276
+shape = SubResource("RectangleShape2D_fy3ub")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(18, 23)
+rotation = 0.43943545
+scale = Vector2(0.99999964, 0.9999997)
+skew = 0.65275276
+shape = SubResource("RectangleShape2D_fy3ub")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

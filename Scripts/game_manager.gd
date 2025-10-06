@@ -81,10 +81,10 @@ func game_over():
 func pickup_effect():
 	var _scene = letterEffectScene.instantiate()
 	car.add_child(_scene)
-	_scene.nodeToFollow = car.get_node("CharacterBody2D")
+	_scene.nodeToFollow = carBody
 	
 func time_pickup_effect():
 	var _scene = timePickupEffectScene.instantiate()
 	car.add_child(_scene)
-	_scene.nodeToFollow = car.get_node("CharacterBody2D")
+	_scene.nodeToFollow = carBody
 	_scene.numberToShow = timeToAddOnPickup

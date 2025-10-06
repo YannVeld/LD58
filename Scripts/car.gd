@@ -178,9 +178,12 @@ func handle_collision(object: Area2D):
 	var space_state = get_world_2d().direct_space_state
 	var ray = velocity.normalized() * _ray_length
 	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + ray)
+	#query.hit_from_inside = true
 	query.collide_with_areas = true
 	query.set_collision_mask(1)
 	var result = space_state.intersect_ray(query)
+	
+	print("Collision!")
 	
 	# Head on collision
 	if result:
@@ -197,12 +200,13 @@ func handle_collision(object: Area2D):
 		var _ang = vecToColl.angle_to(velocity.normalized())
 		_ang = on_collison_car_rotation_frac * _ang
 		rotate(_ang)
-		
+		print("Head on!")
 		return
 		
 	# Check for gracing wall to the right
 	var ray_right = ray.rotated(PI/4)
 	query = PhysicsRayQueryParameters2D.create(global_position, global_position + ray_right)
+	#query.hit_from_inside = true
 	query.collide_with_areas = true
 	query.set_collision_mask(1)
 	result = space_state.intersect_ray(query)
@@ -211,11 +215,13 @@ func handle_collision(object: Area2D):
 		var vecToColl = (coll_pos - global_position).normalized()
 		var _ang = vecToColl.angle_to(velocity.normalized())
 		rotate(_ang)
+		print("Right!")
 		return
 	
 	# Check for gracing wall to the left
 	var ray_left = ray.rotated(-PI/4)
 	query = PhysicsRayQueryParameters2D.create(global_position, global_position + ray_left)
+	#query.hit_from_inside = true
 	query.collide_with_areas = true
 	query.set_collision_mask(1)
 	result = space_state.intersect_ray(query)
@@ -224,6 +230,7 @@ func handle_collision(object: Area2D):
 		var vecToColl = (coll_pos - global_position).normalized()
 		var _ang = vecToColl.angle_to(velocity.normalized())
 		rotate(_ang)
+		print("Left!")
 		return
 	
 	
